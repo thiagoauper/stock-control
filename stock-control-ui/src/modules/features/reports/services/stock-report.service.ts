@@ -11,7 +11,12 @@ export class StockReportService {
 
   fetchStockReport(movementDate: Date, productCode: string): Observable<any> {
     const movementDateString = movementDate.getFullYear() + '-' + movementDate.getMonth() + '-' + movementDate.getDay();
-    const apiUrl = 'http://localhost:5053/api/StockReport/' + movementDateString + '/' + productCode;
+    var apiUrl : string = 'http://localhost:5053/api/StockReport/' + movementDateString;
+    
+    if(productCode) {
+      apiUrl += '/' + productCode;
+    }
+    
     return this.http.get<Observable<any>>(apiUrl);
   }
 }
