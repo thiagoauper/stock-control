@@ -1,1 +1,42 @@
-<p>stock-report works!</p>
+<div class="form-group align-center">
+    <h2>Stock Report</h2>
+    
+    <div>
+        <label for="movementDate">Movement Date</label>
+        <input type="date" id="movementDate" class="form-control" [(ngModel)]="movementDate">
+    </div>
+    
+    <div>
+        <label for="productCode">Product Code</label>
+        <input type="text" id="productCode" class="form-control" placeholder="Enter code" [(ngModel)]="productCode">
+    </div>
+    
+    <div>
+        <button class="btn btn-primary" (click)="generateReport()">Generate Report</button>
+    </div>
+    
+    <div *ngIf="stockData?.length">
+        <table class="table table-bordered" *ngIf="stockData?.length">
+            <thead>
+                <tr>
+                    <th>Product Code</th>
+                    <th>Movement Date</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of stockData">
+                    <td>{{ item.productCode }}</td>
+                    <td>{{ item.movementDate | date }}</td>
+                    <td>{{ item.totalInbound }}</td>
+                    <td>{{ item.totalOutbound }}</td>
+                    <td>{{ item.balance }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="!stockData?.length" class="alert alert-info">
+            <p>No data available.</p>
+        </div>
+    </div>
+</div>
