@@ -21,7 +21,6 @@
                 <tr>
                     <th>Product Name</th>
                     <th>Product Code</th>
-                    <th>Movement Date</th>
                     <th>Total Inbound</th>
                     <th>Total Outbound</th>
                     <th>Balance</th>
@@ -31,7 +30,6 @@
                 <tr *ngFor="let item of stockData">
                     <td>{{ item.productName }}</td>
                     <td>{{ item.productCode }}</td>
-                    <td>{{ item.movementDate | date }}</td>
                     <td>{{ item.totalInbound }}</td>
                     <td>{{ item.totalOutbound }}</td>
                     <td>{{ item.balance }}</td>

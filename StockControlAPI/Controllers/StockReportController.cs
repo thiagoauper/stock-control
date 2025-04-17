@@ -1,0 +1,94 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using StockControlAPI.DTO;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace StockControlAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class StockReportController : ControllerBase
+    {
+        // GET: api/<ReportController>/movementDate/productCode
+        [HttpGet("{movementDate}/{productCode}")]
+        public IEnumerable<StockReportItemDTO> Get(DateTime movementDate, string productCode)
+        {
+            return new StockReportItemDTO[]
+            {
+                new StockReportItemDTO
+                {
+                    ProductName = "Product 1",
+                    ProductCode = "P001",
+                    TotalInbound = 100,
+                    TotalOutbound = 50,
+                    Balance = 50
+                },
+                new StockReportItemDTO
+                {
+                    ProductName = "Product 2",
+                    ProductCode = "P002",
+                    TotalInbound = 200,
+                    TotalOutbound = 80,
+                    Balance = 120
+                },
+                new StockReportItemDTO
+                {
+                    ProductName = "Product 3",
+                    ProductCode = "P003",
+                    TotalInbound = 150,
+                    TotalOutbound = 70,
+                    Balance = 80
+                },
+                new StockReportItemDTO
+                {
+                    ProductName = "Product 4",
+                    ProductCode = "P004",
+                    TotalInbound = 300,
+                    TotalOutbound = 150,
+                    Balance = 150
+                },
+                new StockReportItemDTO
+                {
+                    ProductName = "Product 5",
+                    ProductCode = "P005",
+                    TotalInbound = 50,
+                    TotalOutbound = 20,
+                    Balance = 30
+                },
+
+                new StockReportItemDTO
+                {
+                    ProductName = "Product 6",
+                    ProductCode = "P006",
+                    TotalInbound = 400,
+                    TotalOutbound = 200,
+                    Balance = 200
+                },
+                new StockReportItemDTO
+                {
+                    ProductName = "Product 7",
+                    ProductCode = "P007",
+                    TotalInbound = 250,
+                    TotalOutbound = 100,
+                    Balance = 150
+                },
+                new StockReportItemDTO
+                {
+                    ProductName = "Product 8",
+                    ProductCode = "P008",
+                    TotalInbound = 600,
+                    TotalOutbound = 300,
+                    Balance = 300
+                },
+                new StockReportItemDTO
+                {
+                    ProductName = "Product 9",
+                    ProductCode = "P009",
+                    TotalInbound = 350,
+                    TotalOutbound = 150,
+                    Balance = 200
+                }
+            };
+        }
+    }
+}
