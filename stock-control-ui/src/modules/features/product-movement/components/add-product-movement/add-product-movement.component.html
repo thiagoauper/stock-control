@@ -3,12 +3,12 @@
 
     <div>
         <label for="productCode">Product Code</label>
-        <input type="text" id="productCode" class="form-control" placeholder="Enter code">
+        <input type="text" id="productCode" class="form-control" placeholder="Enter code" [(ngModel)]="productMovement.productCode">
     </div>
 
     <div>
         <label for="productMovementType">Movement Type</label>
-        <select id="productMovementType" class="form-control">
+        <select id="productMovementType" class="form-control" [(ngModel)]="productMovement.movementType">
             <option value="" disabled selected>Select an option</option>
             <option value="0">Inbound</option>
             <option value="1">Outbound</option>
@@ -17,7 +17,11 @@
 
     <div>
         <label for="productQuantity">Quantity</label>
-        <input type="text" id="productQuantity" class="form-control" placeholder="Enter quantity">
+        <input type="text" id="productQuantity" class="form-control" placeholder="Enter quantity" [(ngModel)]="productMovement.quantity">
+    </div>
+
+    <div>
+        <button mat-raised-button color="primary" (click)="addProductMovement()">Add Movement</button>
     </div>
 
 </div>

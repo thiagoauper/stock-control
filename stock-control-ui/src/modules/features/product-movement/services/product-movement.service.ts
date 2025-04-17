@@ -11,7 +11,7 @@ export class ProductMovementService {
   constructor(private http: HttpClient) { }
 
   postProductMovement(productMovement: ProductMovementModel): Observable<any> {
-    const apiUrl = 'https://localhost:7120/api/ProductMovement';
+    const apiUrl = 'http://localhost:5053/api/ProductMovement';
     return this.http.post(apiUrl, productMovement);
   }
 
