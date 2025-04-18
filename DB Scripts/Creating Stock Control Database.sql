@@ -1,0 +1,77 @@
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.Product
+	(
+	Id INT NOT NULL,
+	Name varchar(50) NOT NULL,
+	Code uniqueidentifier NOT NULL,
+	Quantity INT NOT NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.Product ADD CONSTRAINT
+	Product_Quantity_Not_Negative CHECK (Quantity >= 0)
+GO
+ALTER TABLE dbo.Product ADD CONSTRAINT
+	PK_Product PRIMARY KEY CLUSTERED 
+	(
+	Id
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX Unique_Product_Code ON dbo.Product
+	(
+	Code
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+ALTER TABLE dbo.Product SET (LOCK_ESCALATION = TABLE)
+GO
+
+GO
+ALTER TABLE dbo.Product SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.ProductMovement
+	(
+	Id int NOT NULL,
+	ProductId int NOT NULL,
+	CreationDate datetime NOT NULL,
+	TotalInbound int NULL,
+	TotalOutbound int NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.ProductMovement ADD CONSTRAINT
+	Allow_ProductMovement_Inbound_OR_Outbound CHECK ((TotalInbound > 0 AND TotalOutbound IS NULL) OR (TotalInbound IS NULL AND TotalOutbound > 0))
+GO
+ALTER TABLE dbo.ProductMovement ADD CONSTRAINT
+	PK_ProductMovement PRIMARY KEY CLUSTERED 
+	(
+	id
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.ProductMovement ADD CONSTRAINT
+	FK_ProductMovement_Product FOREIGN KEY
+	(
+	ProductId
+	) REFERENCES dbo.Product
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.ProductMovement SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
