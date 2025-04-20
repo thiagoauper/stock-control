@@ -1,4 +1,4 @@
-namespace StockControlAPI
+namespace StockControl.API
 {
     public class WeatherForecast
     {

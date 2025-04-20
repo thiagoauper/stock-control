@@ -3,7 +3,7 @@ using StockControlAPI.DTO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace StockControlAPI.Controllers
+namespace StockControl.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -25,6 +25,9 @@ namespace StockControlAPI.Controllers
 
         private static IEnumerable<StockReportItemDTO> GenerateTemporaryData(string? productCode)
         {
+
+            //TODO: Get stock data from database!
+
             var items = new StockReportItemDTO[]
             {
                 new StockReportItemDTO

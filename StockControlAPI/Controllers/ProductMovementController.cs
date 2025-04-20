@@ -4,7 +4,7 @@ using StockControlAPI.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace StockControlAPI.Controllers
+namespace StockControl.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,7 +21,7 @@ namespace StockControlAPI.Controllers
 
             ProductMovement productMovement = movement.ToModel();
 
-            //TODO: Persist product movement in the data base!
+            //TODO: Persist product movement in the data base!!
         }
     }
 }
