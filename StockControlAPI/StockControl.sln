@@ -5,7 +5,7 @@ VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockControl.API", "StockControl.API.csproj", "{46B51635-D62C-4FC3-8AFE-3AB7EF8A4CE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockControlAPI.UnitTests", "..\StockControlAPI.Tests\StockControlAPI.UnitTests.csproj", "{D4630731-5FCC-4844-8EF8-48C294A18A05}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockControl.API.UnitTests", "..\StockControlAPI.Tests\StockControl.API.UnitTests.csproj", "{D4630731-5FCC-4844-8EF8-48C294A18A05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

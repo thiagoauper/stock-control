@@ -1,7 +1,7 @@
 ﻿using StockControlAPI.DTO;
 using StockControlAPI.Entities;
 
-namespace StockControlAPI.UnitTests
+namespace StockControl.API.UnitTests
 {
     public class ProductMovementTests
     {
