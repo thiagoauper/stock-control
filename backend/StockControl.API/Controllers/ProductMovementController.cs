@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StockControl.Application.Interfaces;
 using StockControl.Domain.DTOs;
 using StockControl.Domain.Entities;
 
@@ -10,18 +11,18 @@ namespace StockControl.API.Controllers
     [ApiController]
     public class ProductMovementController : ControllerBase
     {
+        private readonly IProductMovementService _productMovementService;
+
+        public ProductMovementController(IProductMovementService productMovementService)
+        {
+            this._productMovementService = productMovementService;
+        }
+
         // POST api/<ProductMovementController>
         [HttpPost]
         public void Post([FromBody] ProductMovementDTO movement)
         {
-            if (!movement.IsValid())
-            {
-                throw new ArgumentException("Invalid product movement data.");
-            }
-
-            ProductMovement productMovement = movement.ToModel();
-
-            //TODO: Persist product movement in the data base!!
+            this._productMovementService.AddProductMovement(movement);
         }
     }
 }

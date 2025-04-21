@@ -37,4 +37,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+//TODO: SET UP DEPENDENCY INJECTION !!!
+
 app.Run();

@@ -26,7 +26,7 @@ namespace StockControl.API.Controllers
         private static IEnumerable<StockReportItemDTO> GenerateTemporaryData(string? productCode)
         {
 
-            //TODO: Get stock data from database!
+            //TODO: Replace all this with a call to a Service from the Application Layer!
 
             var items = new StockReportItemDTO[]
             {
