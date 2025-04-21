@@ -1,5 +1,5 @@
-﻿using StockControlAPI.DTO;
-using StockControlAPI.Entities;
+﻿using StockControl.API.DTO;
+using StockControl.API.Entities;
 
 namespace StockControl.API.UnitTests
 {

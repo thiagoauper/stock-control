@@ -1,4 +1,4 @@
-﻿namespace StockControlAPI.DTO
+﻿namespace StockControl.API.DTO
 {
     public class StockReportItemDTO
     {

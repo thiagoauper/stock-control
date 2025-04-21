@@ -1,4 +1,4 @@
-﻿namespace StockControlAPI.Entities
+﻿namespace StockControl.API.Entities
 {
     public class EntityBase
     {
