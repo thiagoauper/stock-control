@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StockControl.Business.Interfaces\StockControl.Business.Interfaces.csproj" />
+    <ProjectReference Include="..\StockControl.DataAccess.Interfaces\StockControl.DataAccess.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Managers\" />
   </ItemGroup>
 
 </Project>

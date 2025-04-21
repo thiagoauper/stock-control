@@ -1,11 +1,18 @@
 using StockControl.Application.Interfaces.Services;
 using StockControl.Application.Core.Services;
+using StockControl.Business.Interfaces.Managers;
+using StockControl.Business.Managers;
+using StockControl.DataAccess.Interfaces.Repositories;
+using StockControl.DataAccess.EntityFramework.Repositories;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Setting up Dependency Injection
 builder.Services.AddSingleton<IProductMovementService, ProductMovementService>();
+builder.Services.AddSingleton<IProductMovementManager, ProductMovementManager>();
+builder.Services.AddSingleton<IProductMovementRepository, ProductMovementRepository>();
+
 builder.Services.AddSingleton<IStockReportService, StockReportService>();
 
 var allowOrigins = "AllowAll";

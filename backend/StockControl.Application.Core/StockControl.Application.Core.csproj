@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StockControl.Application.Interfaces\StockControl.Application.Interfaces.csproj" />
+    <ProjectReference Include="..\StockControl.Business.Interfaces\StockControl.Business.Interfaces.csproj" />
     <ProjectReference Include="..\StockControl.Domain\StockControl.Domain.csproj" />
   </ItemGroup>
 

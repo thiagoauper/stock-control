@@ -13,6 +13,10 @@
   <ItemGroup>
     <ProjectReference Include="..\StockControl.Application.Core\StockControl.Application.Core.csproj" />
     <ProjectReference Include="..\StockControl.Application.Interfaces\StockControl.Application.Interfaces.csproj" />
+    <ProjectReference Include="..\StockControl.Business.Core\StockControl.Business.Core.csproj" />
+    <ProjectReference Include="..\StockControl.Business.Interfaces\StockControl.Business.Interfaces.csproj" />
+    <ProjectReference Include="..\StockControl.DataAccess.EntityFramework\StockControl.DataAccess.EntityFramework.csproj" />
+    <ProjectReference Include="..\StockControl.DataAccess.Interfaces\StockControl.DataAccess.Interfaces.csproj" />
     <ProjectReference Include="..\StockControl.Domain\StockControl.Domain.csproj" />
   </ItemGroup>
 

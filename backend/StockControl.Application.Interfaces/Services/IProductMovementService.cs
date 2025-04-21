@@ -8,6 +8,6 @@ namespace StockControl.Application.Interfaces.Services
         /// Adds a new product movement to the system.
         /// </summary>
         /// <param name="productMovement">The product movement to add.</param>
-        void AddProductMovement(ProductMovementDTO productMovement);
+        int AddProductMovement(ProductMovementDTO productMovement);
     }
 }

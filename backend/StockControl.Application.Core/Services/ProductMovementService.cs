@@ -1,21 +1,21 @@
 ﻿using StockControl.Application.Interfaces.Services;
+using StockControl.Business.Interfaces.Managers;
 using StockControl.Domain.DTOs;
-using StockControl.Domain.Entities;
 
 namespace StockControl.Application.Core.Services
 {
     public class ProductMovementService : IProductMovementService
     {
-        public void AddProductMovement(ProductMovementDTO productMovement)
+        private readonly IProductMovementManager _productMovementManager;
+
+        public ProductMovementService(IProductMovementManager productMovementManager)
         {
-            if (!productMovement.IsValid())
-            {
-                throw new ArgumentException("Invalid product movement data.");
-            }
+            this._productMovementManager = productMovementManager;
+        }
 
-            ProductMovement movement = productMovement.ToModel();
-
-            //TODO: Persist product movement in the data base!!!
+        public int AddProductMovement(ProductMovementDTO productMovement)
+        {
+            return this._productMovementManager.AddProductMovement(productMovement.ToModel());
         }
     }
 }

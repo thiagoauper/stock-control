@@ -10,4 +10,8 @@
     <ProjectReference Include="..\StockControl.DataAccess.Interfaces\StockControl.DataAccess.Interfaces.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>

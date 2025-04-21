@@ -11,6 +11,7 @@ namespace StockControl.Domain.DTOs
 
         public bool IsValid()
         {
+            //TODO: This method is no longer necessary, as the validation is done in the ProductMovement class. Remove it when possible.
             return ProductCode != Guid.Empty && Quantity > 0;
         }
 
