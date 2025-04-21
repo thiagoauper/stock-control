@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StockControl.Application.Interfaces;
+using StockControl.Application.Interfaces.Services;
 using StockControl.Domain.DTOs;
 using StockControl.Domain.Entities;
 

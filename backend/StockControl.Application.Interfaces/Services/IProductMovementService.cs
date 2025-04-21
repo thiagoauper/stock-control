@@ -1,6 +1,6 @@
 ﻿using StockControl.Domain.DTOs;
 
-namespace StockControl.Application.Interfaces
+namespace StockControl.Application.Interfaces.Services
 {
     public interface IProductMovementService
     {

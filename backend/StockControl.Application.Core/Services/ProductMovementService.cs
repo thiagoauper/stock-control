@@ -1,8 +1,8 @@
-﻿using StockControl.Application.Interfaces;
+﻿using StockControl.Application.Interfaces.Services;
 using StockControl.Domain.DTOs;
 using StockControl.Domain.Entities;
 
-namespace StockControl.Application.Core
+namespace StockControl.Application.Core.Services
 {
     public class ProductMovementService : IProductMovementService
     {
