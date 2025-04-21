@@ -208,3 +208,5 @@
 /backend/StockControl.Domain/obj/
 /backend/StockControl.API.Tests/bin/
 /backend/StockControl.API/bin/
+/backend/StockControl.API.UnitTests/bin/
+/backend/StockControl.API.UnitTests/obj/
