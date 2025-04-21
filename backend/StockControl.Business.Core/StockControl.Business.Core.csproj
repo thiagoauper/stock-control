@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StockControl.Business.Interfaces\StockControl.Business.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>
