@@ -204,3 +204,7 @@
 /backend/StockControl.DataAccess/obj/
 /backend/StockControl.DataAccess.Interfaces/bin/
 /backend/StockControl.DataAccess.Interfaces/obj/
+/backend/StockControl.Domain/bin/
+/backend/StockControl.Domain/obj/
+/backend/StockControl.API.Tests/bin/
+/backend/StockControl.API/bin/

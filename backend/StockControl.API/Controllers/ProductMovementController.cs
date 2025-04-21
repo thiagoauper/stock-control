@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StockControl.API.DTO;
-using StockControl.API.Entities;
+using StockControl.Domain.DTOs;
+using StockControl.Domain.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockControl.Business.Core"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockControl.DataAccess.Interfaces", "StockControl.DataAccess.Interfaces\StockControl.DataAccess.Interfaces.csproj", "{274B9E48-636D-2608-B6FF-4CD21BB8478E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockControl.Domain", "StockControl.Domain\StockControl.Domain.csproj", "{228CEE92-217E-4B98-87D6-86B71391F39D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{274B9E48-636D-2608-B6FF-4CD21BB8478E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{274B9E48-636D-2608-B6FF-4CD21BB8478E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{274B9E48-636D-2608-B6FF-4CD21BB8478E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{228CEE92-217E-4B98-87D6-86B71391F39D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{228CEE92-217E-4B98-87D6-86B71391F39D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{228CEE92-217E-4B98-87D6-86B71391F39D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{228CEE92-217E-4B98-87D6-86B71391F39D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

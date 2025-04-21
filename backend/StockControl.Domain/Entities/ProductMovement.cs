@@ -1,6 +1,6 @@
-﻿using StockControl.API.Enums;
+﻿using StockControl.Domain.Enums;
 
-namespace StockControl.API.Entities
+namespace StockControl.Domain.Entities
 {
     public class ProductMovement : EntityBase
     {

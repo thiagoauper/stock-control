@@ -1,7 +1,7 @@
-﻿using StockControl.API.Entities;
-using StockControl.API.Enums;
+﻿using StockControl.Domain.Entities;
+using StockControl.Domain.Enums;
 
-namespace StockControl.API.DTO
+namespace StockControl.Domain.DTOs
 {
     public class ProductMovementDTO
     {

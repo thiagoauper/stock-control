@@ -1,4 +1,4 @@
-﻿namespace StockControl.API.Enums
+﻿namespace StockControl.Domain.Enums
 {
     public enum ProductMovementType
     {
