@@ -1,4 +1,10 @@
+using StockControl.Application.Interfaces;
+using StockControl.Application.Core;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//Setting up Dependency Injection
+builder.Services.AddSingleton<IProductMovementService, ProductMovementService>();
 
 var allowOrigins = "AllowAll";
 
@@ -36,7 +42,5 @@ app.UseCors(allowOrigins);
 app.UseAuthorization();
 
 app.MapControllers();
-
-//TODO: SET UP DEPENDENCY INJECTION !!!
 
 app.Run();
