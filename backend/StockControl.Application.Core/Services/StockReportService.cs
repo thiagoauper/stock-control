@@ -17,7 +17,7 @@ namespace StockControl.Application.Core.Services
             this._productManager = productManager;
         }
 
-        public IEnumerable<StockReportItemDTO> GetStockReport(DateTime movementDate, Guid productCode)
+        public IEnumerable<StockReportItemDTO> GetStockReport(DateTime movementDate, string productCode)
         {
             var stockReport = new List<StockReportItemDTO>();
 
@@ -26,9 +26,9 @@ namespace StockControl.Application.Core.Services
                     .Where(m => m.CreationDate.Date == movementDate.Date).ToList();
 
             List<Product> products = 
-                productCode == Guid.Empty
-                ? this._productManager.GetAllProducts().ToList()
-                : this._productManager.GetAllProducts().Where(p => p.Code == productCode).ToList();
+                string.IsNullOrWhiteSpace(productCode)
+                    ? this._productManager.GetAllProducts().ToList()
+                    : this._productManager.GetAllProducts().Where(p => p.Code == productCode).ToList();
 
             foreach (Product product in products)
             {

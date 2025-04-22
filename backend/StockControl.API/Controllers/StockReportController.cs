@@ -21,14 +21,14 @@ namespace StockControl.API.Controllers
         [HttpGet("{movementDate}")]
         public IEnumerable<StockReportItemDTO> Get(DateTime movementDate)
         {
-            return _stockReportService.GetStockReport(movementDate, Guid.Empty);
+            return _stockReportService.GetStockReport(movementDate, null);
         }
 
         // GET: api/<ReportController>/movementDate/productCode
         [HttpGet("{movementDate}/{productCode}")]
         public IEnumerable<StockReportItemDTO> Get(DateTime movementDate, string productCode)
         {
-            return _stockReportService.GetStockReport(movementDate, Guid.Parse(productCode));
+            return _stockReportService.GetStockReport(movementDate, productCode);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace StockControl.API.UnitTests
         {
             return new ProductMovementDTO
             {
-                ProductCode = Guid.NewGuid(),
+                ProductCode = Guid.NewGuid().ToString(),
                 Quantity = 1
             };
         }
@@ -31,7 +31,7 @@ namespace StockControl.API.UnitTests
         public void Given_ProductMovement_When_ProductCodeIsUndefined_Then_ValidationMethodReturnsFalse()
         {
             ProductMovementDTO productMovement = CreateValidProductMovement();
-            productMovement.ProductCode = Guid.Empty;
+            productMovement.ProductCode = null;
             Assert.False(productMovement.IsValid());
         }
 

@@ -34,7 +34,7 @@ namespace StockControl.Domain.Entities
             if (Product == null)
                 throw new ArgumentException("Product cannot be null.", nameof(Product));
 
-            if (Product.Code == Guid.Empty)
+            if (string.IsNullOrWhiteSpace(Product.Code))
                 throw new ArgumentException("Product code is required.", nameof(Product.Code));
         }
     }
