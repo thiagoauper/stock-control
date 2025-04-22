@@ -21,7 +21,8 @@ namespace StockControl.Business.Managers
             productMovement.Validate();
 
             Console.WriteLine($"Product Movement Added: Product={productMovement.Product.Name}, " +
-                              $"TotalInbound={productMovement.TotalInbound}, TotalOutbound={productMovement.TotalOutbound}, " +
+                              $"MovementType={productMovement.MovementType}, " +
+                              $"Quantity={productMovement.Quantity}, " +
                               $"Date={productMovement.CreationDate}");
 
             int productMovementId = this._productMovementRepository.AddProductMovement(productMovement);

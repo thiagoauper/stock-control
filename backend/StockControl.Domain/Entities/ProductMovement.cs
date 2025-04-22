@@ -1,39 +1,35 @@
-﻿namespace StockControl.Domain.Entities
+﻿using StockControl.Domain.Enums;
+
+namespace StockControl.Domain.Entities
 {
     public class ProductMovement : EntityBase
     {
-        public ProductMovement(Product product, int? totalInbound, int? totalOutbound)
+        public ProductMovement(Product product, ProductMovementType movementType, int quantity)
         {
             Product = product;
+            MovementType = movementType;
             CreationDate = DateTime.UtcNow;
-            TotalInbound = totalInbound;
-            TotalOutbound = totalOutbound;
+            Quantity = quantity;
         }
 
-        public ProductMovement(int productId, DateTime creationDate, int? totalInbound, int? totalOutbound)
+        public ProductMovement(int productId, DateTime creationDate, ProductMovementType movementType, int quantity)
         {
             ProductId = productId;
+            MovementType = movementType;
             CreationDate = creationDate;
-            TotalInbound = totalInbound;
-            TotalOutbound = totalOutbound;
+            Quantity = quantity;
         }
 
         public Product Product { get; set; }
         public int ProductId { get; set; }
+        public ProductMovementType MovementType { get; set; }
         public DateTime CreationDate { get; set; }
-        public int? TotalInbound {  get; set; }
-        public int? TotalOutbound {  get; set; }
+        public int Quantity {  get; set; }
 
         public void Validate()
         {
-            if (TotalInbound.HasValue && TotalOutbound.HasValue || (!TotalInbound.HasValue && !TotalOutbound.HasValue))
-                throw new ArgumentException("Either Total Inbound field OR Total Outbound field should have a value.");
-
-            if (TotalInbound.HasValue && TotalInbound.Value <= 0)
-                throw new ArgumentException("Total Inbound field cannot be negative.", nameof(TotalInbound));
-
-            if (TotalOutbound.HasValue && TotalOutbound.Value <= 0)
-                throw new ArgumentException("Total Outbound field cannot be negative.", nameof(TotalOutbound));
+            if (Quantity <= 0)
+                throw new ArgumentException("Quantity should be positive.", nameof(Quantity));
 
             if (Product == null)
                 throw new ArgumentException("Product cannot be null.", nameof(Product));

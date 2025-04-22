@@ -19,8 +19,8 @@ namespace StockControl.Domain.DTOs
         {
             return new ProductMovement(
                 new Product { Code = ProductCode },
-                MovementType == ProductMovementType.In ? Quantity : null,
-                MovementType == ProductMovementType.Out ? Quantity : null
+                MovementType,
+                Quantity
             );
         }
     }
