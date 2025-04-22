@@ -40,7 +40,7 @@ BEGIN TRANSACTION
 GO
 CREATE TABLE dbo.ProductMovement
 	(
-	Id int NOT NULL,
+	Id int NOT NULL IDENTITY (1, 1),
 	ProductId int NOT NULL,
 	CreationDate datetime NOT NULL,
 	TotalInbound int NULL,
