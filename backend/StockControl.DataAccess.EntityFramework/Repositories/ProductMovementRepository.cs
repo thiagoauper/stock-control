@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using StockControl.DataAccess.Interfaces.Repositories;
 using StockControl.Domain.Entities;
 
@@ -5,13 +6,23 @@ namespace StockControl.DataAccess.EntityFramework.Repositories
 {
     public class ProductMovementRepository : IProductMovementRepository
     {
-        //TODO: REPLACE THIS TEMPORARY IN-MEMORY IMPLEMENTATION WITH ACTUAL ENTITY FRAMEWORK CODE!
+        private readonly StockControlDbContext _stockControlDbContext;
 
-        private readonly List<ProductMovement> _productMovements;
+        //N.B. This constructor does not work due to the fact that it's not possible to inject a Scoped service into
+        //     a Singleton service in .Net Core. Please have a read through the other constructor below.
+        //public ProductMovementRepository(StockControlDbContext stockControlDbContext)
+        //{
+        //    _stockControlDbContext = stockControlDbContext;
+        //}
 
-        public ProductMovementRepository()
+        public ProductMovementRepository(IServiceScopeFactory serviceScopeFactory)
         {
-            _productMovements = new List<ProductMovement>();
+            //This was necessary to make a Scoped service (StockControlDbContext) to work inside a Singleton service (ProductMovementRepository)
+            //For more info, visit this url below (Using Scoped Services From Singletons in ASP.NET Core)
+            //https://www.milanjovanovic.tech/blog/using-scoped-services-from-singletons-in-aspnetcore#the-solution---iservicescopefactory
+
+            IServiceScope scope = serviceScopeFactory.CreateScope();
+            _stockControlDbContext = scope.ServiceProvider.GetRequiredService<StockControlDbContext>();
         }
 
         /// <summary>
@@ -23,11 +34,18 @@ namespace StockControl.DataAccess.EntityFramework.Repositories
             if (productMovement == null)
                 throw new ArgumentNullException(nameof(productMovement));
 
-            productMovement.Id = _productMovements.Count > 0
-                ? _productMovements.Max(pm => pm.Id) + 1
-                : 1;
+            Product selectedProduct = _stockControlDbContext.Product.SingleOrDefault(p => p.Code == productMovement.Product.Code);
+            if(selectedProduct == null)
+            {
+                throw new ApplicationException($"There is no product with code '{productMovement.Product.Code}'.");
+            }
+            
+            productMovement.Product = selectedProduct;
+            productMovement.ProductId = selectedProduct.Id;
+            
+            _stockControlDbContext.ProductMovement.Add(productMovement);
+            _stockControlDbContext.SaveChanges();
 
-            _productMovements.Add(productMovement);
             return productMovement.Id;
         }
 
@@ -37,7 +55,7 @@ namespace StockControl.DataAccess.EntityFramework.Repositories
         /// <returns>A list of all product movements.</returns>
         public IEnumerable<ProductMovement> GetAllProductMovements()
         {
-            return _productMovements;
+            return _stockControlDbContext.ProductMovement.ToList();
         }
     }
 }

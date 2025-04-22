@@ -4,9 +4,13 @@ using StockControl.Business.Interfaces.Managers;
 using StockControl.Business.Managers;
 using StockControl.DataAccess.Interfaces.Repositories;
 using StockControl.DataAccess.EntityFramework.Repositories;
+using StockControl.DataAccess.EntityFramework;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Database Context
+builder.Services.AddDbContext<StockControlDbContext>();
 
 //Setting up Dependency Injection
 builder.Services.AddSingleton<IProductMovementService, ProductMovementService>();

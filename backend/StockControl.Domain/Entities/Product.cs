@@ -4,5 +4,6 @@
     {
         public string Name { get; set; }
         public Guid Code { get; set; }
+        public int Quantity { get; set; }
     }
 }
