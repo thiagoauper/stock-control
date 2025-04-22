@@ -17,6 +17,9 @@ builder.Services.AddSingleton<IProductMovementService, ProductMovementService>()
 builder.Services.AddSingleton<IProductMovementManager, ProductMovementManager>();
 builder.Services.AddSingleton<IProductMovementRepository, ProductMovementRepository>();
 
+builder.Services.AddSingleton<IProductManager, ProductManager>();
+builder.Services.AddSingleton<IProductRepository, ProductRepository>();
+
 builder.Services.AddSingleton<IStockReportService, StockReportService>();
 
 var allowOrigins = "AllowAll";

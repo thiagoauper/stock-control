@@ -2,7 +2,7 @@
 {
     public enum ProductMovementType
     {
-        In = 0, 
-        Out = 1
+        Inbound = 0, 
+        Outbound = 1
     }
 }

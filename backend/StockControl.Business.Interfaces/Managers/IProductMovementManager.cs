@@ -5,5 +5,6 @@ namespace StockControl.Business.Interfaces.Managers
     public interface IProductMovementManager
     {
         int AddProductMovement(ProductMovement productMovement);
+        IEnumerable<ProductMovement> GetAllProductMovements();
     }
 }

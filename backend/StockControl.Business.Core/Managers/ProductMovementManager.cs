@@ -29,5 +29,10 @@ namespace StockControl.Business.Managers
 
             return productMovementId;
         }
+
+        public IEnumerable<ProductMovement> GetAllProductMovements()
+        {
+            return this._productMovementRepository.GetAllProductMovements();
+        }
     }
 }

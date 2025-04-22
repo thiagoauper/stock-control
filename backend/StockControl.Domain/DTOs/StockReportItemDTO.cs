@@ -2,9 +2,8 @@
 {
     public class StockReportItemDTO
     {
-        public DateTime MovementDate { get; set; }
         public string ProductName { get; set; }
-        public string ProductCode { get; set; }
+        public Guid ProductCode { get; set; }
         public int TotalInbound { get; set; }
         public int TotalOutbound { get; set; }
         public int Balance { get; set; }

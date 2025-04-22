@@ -1,96 +1,62 @@
 using StockControl.Application.Interfaces.Services;
+using StockControl.Business.Interfaces.Managers;
 using StockControl.Domain.DTOs;
+using StockControl.Domain.Entities;
+using StockControl.Domain.Enums;
 
 namespace StockControl.Application.Core.Services
 {
     public class StockReportService : IStockReportService
     {
-        public IEnumerable<StockReportItemDTO> GetStockReport(DateTime movementDate, string productCode)
+        private readonly IProductMovementManager _productMovementManager;
+        private readonly IProductManager _productManager;
+
+        public StockReportService(IProductMovementManager productMovementManager, IProductManager productManager)
         {
-            //TODO: Retrieve this info from the database!
+            this._productMovementManager = productMovementManager;
+            this._productManager = productManager;
+        }
 
-            var stockReport = new List<StockReportItemDTO>
+        public IEnumerable<StockReportItemDTO> GetStockReport(DateTime movementDate, Guid productCode)
+        {
+            var stockReport = new List<StockReportItemDTO>();
+
+            List<ProductMovement> productMovements = 
+                this._productMovementManager.GetAllProductMovements()
+                    .Where(m => m.CreationDate.Date == movementDate.Date).ToList();
+
+            List<Product> products = 
+                productCode == Guid.Empty
+                ? this._productManager.GetAllProducts().ToList()
+                : this._productManager.GetAllProducts().Where(p => p.Code == productCode).ToList();
+
+            foreach (Product product in products)
             {
-                new StockReportItemDTO
-                {
-                    MovementDate = new DateTime(2023, 10, 1),
-                    ProductName = "Product A",
-                    ProductCode = "P001",
-                    TotalInbound = 100,
-                    TotalOutbound = 50,
-                    Balance = 50
-                },
-                new StockReportItemDTO
-                {
-                    MovementDate = new DateTime(2023, 10, 1),
-                    ProductName = "Product B",
-                    ProductCode = "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    TotalInbound = 200,
-                    TotalOutbound = 100,
-                    Balance = 100
-                },
+                List<ProductMovement> specificProductMovements = productMovements
+                    .Where(pm => pm.ProductId == product.Id)
+                    .ToList();
 
-                new StockReportItemDTO
+                if(specificProductMovements.Any())
                 {
-                    MovementDate = new DateTime(2023, 10, 2),
-                    ProductName = "Product A",
-                    ProductCode = "P001",
-                    TotalInbound = 150,
-                    TotalOutbound = 75,
-                    Balance = 75
-                },
-                new StockReportItemDTO
-                {
-                    MovementDate = new DateTime(2023, 10, 2),
-                    ProductName = "Product B",
-                    ProductCode = "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    TotalInbound = 250,
-                    TotalOutbound = 125,
-                    Balance = 125
-                },
-                new StockReportItemDTO
-                {
-                    MovementDate = new DateTime(2023, 10, 3),
-                    ProductName = "Product A",
-                    ProductCode = "P001",
-                    TotalInbound = 200,
-                    TotalOutbound = 100,
-                    Balance = 100
-                },
-                new StockReportItemDTO
-                {
-                    MovementDate = new DateTime(2023, 10, 3),
-                    ProductName = "Product B",
-                    ProductCode = "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    TotalInbound = 300,
-                    TotalOutbound = 150,
-                    Balance = 150
-                },
-                new StockReportItemDTO
-                {
-                    MovementDate = new DateTime(2023, 10, 4),
-                    ProductName = "Product A",
-                    ProductCode = "P001",
-                    TotalInbound = 250,
-                    TotalOutbound = 125,
-                    Balance = 125
-                },
-                new StockReportItemDTO
-                {
-                    MovementDate = new DateTime(2023, 10, 4),
-                    ProductName = "Product B",
-                    ProductCode = "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    TotalInbound = 350,
-                    TotalOutbound = 175,
-                    Balance = 175
+                    int totalInbound = specificProductMovements
+                        .Where(pm => pm.MovementType == ProductMovementType.Inbound)
+                        .Sum(pm => pm.Quantity);
+
+                    int totalOutbound = specificProductMovements
+                        .Where(pm => pm.MovementType == ProductMovementType.Outbound)
+                        .Sum(pm => pm.Quantity);
+
+                    var stockReportItem = new StockReportItemDTO
+                    {
+                        ProductCode = product.Code,
+                        ProductName = product.Name,
+                        TotalInbound = totalInbound,
+                        TotalOutbound = totalOutbound,
+                        Balance = totalInbound - totalOutbound
+                    };
+
+                    stockReport.Add(stockReportItem);
                 }
-            };
-
-            stockReport = stockReport.Where(item => item.MovementDate == movementDate).ToList();
-
-            if(!string.IsNullOrWhiteSpace(productCode))
-            {
-                stockReport = stockReport.Where(item => item.ProductCode == productCode).ToList();
             }
 
             return stockReport;
