@@ -4,6 +4,7 @@ namespace StockControl.Application.Interfaces.Services
 {
     public interface IStockReportService
     {
-        IEnumerable<StockReportItemDTO> GetStockReport(DateTime movementDate, string productCode);
+        IEnumerable<StockReportItemDTO> GetStockReport(DateTime? movementDate, string productCode);
+        StockReportItemDTO GetStockReport(string productCode);
     }
 }

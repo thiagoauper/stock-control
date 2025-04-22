@@ -17,13 +17,38 @@ namespace StockControl.Application.Core.Services
             this._productManager = productManager;
         }
 
-        public IEnumerable<StockReportItemDTO> GetStockReport(DateTime movementDate, string productCode)
+        public StockReportItemDTO GetStockReport(string productCode)
+        {
+            Product product = this._productManager.GetAllProducts().SingleOrDefault(p => p.Code == productCode);
+
+            if(product == null)
+            {
+                throw new ApplicationException($"There is no product with code '{productCode}'.");
+            }
+
+            List<ProductMovement> specificProductMovements = 
+                this._productMovementManager.GetAllProductMovements()
+                    .Where(pm => pm.ProductId == product.Id)
+                    .ToList();
+
+            if (specificProductMovements.Any())
+            {
+                StockReportItemDTO stockReportItem = GetStockReportItem(product, specificProductMovements);
+                return stockReportItem;
+            }
+
+            return null;
+        }
+
+        public IEnumerable<StockReportItemDTO> GetStockReport(DateTime? movementDate, string productCode)
         {
             var stockReport = new List<StockReportItemDTO>();
 
-            List<ProductMovement> productMovements = 
-                this._productMovementManager.GetAllProductMovements()
-                    .Where(m => m.CreationDate.Date == movementDate.Date).ToList();
+            List<ProductMovement> productMovements =
+                movementDate.HasValue
+                        ? this._productMovementManager.GetAllProductMovements()
+                            .Where(m => m.CreationDate.Date == movementDate.Value.Date).ToList()
+                        : this._productMovementManager.GetAllProductMovements().ToList();
 
             List<Product> products = 
                 string.IsNullOrWhiteSpace(productCode)
@@ -38,28 +63,34 @@ namespace StockControl.Application.Core.Services
 
                 if(specificProductMovements.Any())
                 {
-                    int totalInbound = specificProductMovements
-                        .Where(pm => pm.MovementType == ProductMovementType.Inbound)
-                        .Sum(pm => pm.Quantity);
-
-                    int totalOutbound = specificProductMovements
-                        .Where(pm => pm.MovementType == ProductMovementType.Outbound)
-                        .Sum(pm => pm.Quantity);
-
-                    var stockReportItem = new StockReportItemDTO
-                    {
-                        ProductCode = product.Code,
-                        ProductName = product.Name,
-                        TotalInbound = totalInbound,
-                        TotalOutbound = totalOutbound,
-                        Balance = totalInbound - totalOutbound
-                    };
-
+                    StockReportItemDTO stockReportItem = GetStockReportItem(product, specificProductMovements);
                     stockReport.Add(stockReportItem);
                 }
             }
 
             return stockReport;
+        }
+
+        private static StockReportItemDTO GetStockReportItem(Product product, List<ProductMovement> specificProductMovements)
+        {
+            int totalInbound = specificProductMovements
+                                .Where(pm => pm.MovementType == ProductMovementType.Inbound)
+                                .Sum(pm => pm.Quantity);
+
+            int totalOutbound = specificProductMovements
+                .Where(pm => pm.MovementType == ProductMovementType.Outbound)
+                .Sum(pm => pm.Quantity);
+
+            var stockReportItem = new StockReportItemDTO
+            {
+                ProductCode = product.Code,
+                ProductName = product.Name,
+                TotalInbound = totalInbound,
+                TotalOutbound = totalOutbound,
+                Balance = totalInbound - totalOutbound
+            };
+
+            return stockReportItem;
         }
     }
 }
