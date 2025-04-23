@@ -24,6 +24,10 @@ export class StockReportComponent {
         //TODO: Enhance messages presentation in the UI
         this.stockData = stockReportItems;
         console.log('Stock report fetched successfully!', stockReportItems.length);
+
+        if(!stockReportItems?.length) {
+          alert('No stock report found for the given date!');
+        }
       },
       error =>
       {
@@ -38,6 +42,11 @@ export class StockReportComponent {
   }
 
   generateReport() {
+    if(!this.movementDate || this.movementDate.toString().length !== 10) {
+      alert('Please inform a Movement Date!');
+      return;
+    }
+
     this.fetchStockData();
   }
 
