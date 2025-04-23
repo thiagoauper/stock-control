@@ -67,7 +67,7 @@ namespace StockControl.API.UnitTests
             ProductMovement productMovementModel = productMovementDTO.ToModel();
 
             Assert.NotNull(productMovementModel);
-            Assert.Equal(productMovementDTO.MovementType, productMovementModel.MovementType);
+            Assert.Equal(productMovementDTO.MovementType, (int)productMovementModel.MovementType);
             Assert.Equal(productMovementDTO.Quantity, productMovementModel.Quantity);
             
             Assert.NotNull(productMovementModel.Product);
