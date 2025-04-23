@@ -5,12 +5,18 @@ using StockControl.Business.Managers;
 using StockControl.DataAccess.Interfaces.Repositories;
 using StockControl.DataAccess.EntityFramework.Repositories;
 using StockControl.DataAccess.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = 
+    builder.Configuration.GetConnectionString("StockReportDatabase")
+        ?? throw new InvalidOperationException("Connection string 'StockReportDatabase' not found.");
+
 // Database Context
-builder.Services.AddDbContext<StockControlDbContext>();
+builder.Services.AddDbContext<StockControlDbContext>(
+    options => options.UseSqlServer(connectionString));
 
 //Setting up Dependency Injection
 builder.Services.AddSingleton<IProductMovementService, ProductMovementService>();
