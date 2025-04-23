@@ -17,7 +17,7 @@ namespace StockControl.Application.Core.Services
             this._productManager = productManager;
         }
 
-        public StockReportItemDTO GetStockReport(string productCode)
+        public StockReportItemDTO GetProductStock(DateTime movementDate, string productCode)
         {
             Product product = this._productManager.GetAllProducts().SingleOrDefault(p => p.Code == productCode);
 
@@ -28,7 +28,7 @@ namespace StockControl.Application.Core.Services
 
             List<ProductMovement> specificProductMovements = 
                 this._productMovementManager.GetAllProductMovements()
-                    .Where(pm => pm.ProductId == product.Id)
+                    .Where(pm => pm.CreationDate.Date == movementDate.Date && pm.ProductId == product.Id)
                     .ToList();
 
             if (specificProductMovements.Any())
@@ -54,6 +54,11 @@ namespace StockControl.Application.Core.Services
                 string.IsNullOrWhiteSpace(productCode)
                     ? this._productManager.GetAllProducts().ToList()
                     : this._productManager.GetAllProducts().Where(p => p.Code == productCode).ToList();
+
+            if(!string.IsNullOrWhiteSpace(productCode) && !products.Any())
+            {
+                throw new ApplicationException($"There is no product with code '{productCode}'.");
+            }
 
             foreach (Product product in products)
             {

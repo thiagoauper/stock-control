@@ -20,7 +20,7 @@ namespace StockControl.Application.Core.Services
         {
             if(productMovement.MovementType == Domain.Enums.ProductMovementType.Outbound)
             {
-                StockReportItemDTO stockReportItem = _stockReportService.GetStockReport(productMovement.Product.Code);
+                StockReportItemDTO stockReportItem = _stockReportService.GetProductStock(productMovement.CreationDate, productMovement.Product.Code);
 
                 if(stockReportItem == null || stockReportItem.Balance - productMovement.Quantity < 0)
                 {

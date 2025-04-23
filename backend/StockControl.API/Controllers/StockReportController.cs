@@ -19,16 +19,42 @@ namespace StockControl.API.Controllers
 
         // GET: api/<ReportController>/movementDate
         [HttpGet("{movementDate}")]
-        public IEnumerable<StockReportItemDTO> Get(DateTime movementDate)
+        public IActionResult Get(DateTime movementDate)
         {
-            return _stockReportService.GetStockReport(movementDate, null);
+            try
+            {
+                IEnumerable<StockReportItemDTO> stockReportItems = _stockReportService.GetStockReport(movementDate, null);
+                return Ok(stockReportItems);
+            }
+            catch (ApplicationException ex)
+            {
+                return Problem(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                //TODO: Enhancement to be done: Log the exception
+                return Problem("An error occurred while fetching stock report.");
+            }
         }
 
         // GET: api/<ReportController>/movementDate/productCode
         [HttpGet("{movementDate}/{productCode}")]
-        public IEnumerable<StockReportItemDTO> Get(DateTime movementDate, string productCode)
+        public IActionResult Get(DateTime movementDate, string productCode)
         {
-            return _stockReportService.GetStockReport(movementDate, productCode);
+            try
+            {
+                IEnumerable<StockReportItemDTO> stockReportItems = _stockReportService.GetStockReport(movementDate, productCode);
+                return Ok(stockReportItems);
+            }
+            catch (ApplicationException ex)
+            {
+                return Problem(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                //TODO: Enhancement to be done: Log the exception
+                return Problem("An error occurred while fetching stock report.");
+            }
         }
     }
 }

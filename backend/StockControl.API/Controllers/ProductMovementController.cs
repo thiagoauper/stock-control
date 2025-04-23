@@ -26,6 +26,14 @@ namespace StockControl.API.Controllers
                 int productMovementId = this._productMovementService.AddProductMovement(movement.ToModel());
                 return Ok(productMovementId);
             }
+            catch (ArgumentNullException ex)
+            {
+                return Problem(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return Problem(ex.Message);
+            }
             catch (ApplicationException ex)
             {
                 return Problem(ex.Message);
