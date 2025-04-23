@@ -18,8 +18,20 @@ export class AddProductMovementComponent {
   addProductMovement() {
     console.log('Product Movement:', this.productMovement);
     this.productMovementService.postProductMovement(this.productMovement).subscribe(
-      response => {
-        console.log('Product movement added successfully!', response);
+      productMovementId => {
+        //TODO: Enhance messages presentation in the UI
+        alert('Product movement added successfully!');
+        console.log('Product movement added successfully!', productMovementId);
+        this.productMovement = new ProductMovementModel('', 0, 0);
+      },
+      error =>
+      {
+        if(error.error?.detail) {
+          alert(error.error?.detail);
+        } else {
+          alert('Error adding product movement!');
+        }
+        console.error('Error adding product movement:', error);
       }
     );
   }

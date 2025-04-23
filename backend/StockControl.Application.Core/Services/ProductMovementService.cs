@@ -1,6 +1,7 @@
 ﻿using StockControl.Application.Interfaces.Services;
 using StockControl.Business.Interfaces.Managers;
 using StockControl.Domain.DTOs;
+using StockControl.Domain.Entities;
 
 namespace StockControl.Application.Core.Services
 {
@@ -15,11 +16,11 @@ namespace StockControl.Application.Core.Services
             this._stockReportService = stockReportService;
         }
 
-        public int AddProductMovement(ProductMovementDTO productMovement)
+        public int AddProductMovement(ProductMovement productMovement)
         {
             if(productMovement.MovementType == Domain.Enums.ProductMovementType.Outbound)
             {
-                StockReportItemDTO stockReportItem = _stockReportService.GetStockReport(productMovement.ProductCode);
+                StockReportItemDTO stockReportItem = _stockReportService.GetStockReport(productMovement.Product.Code);
 
                 if(stockReportItem == null || stockReportItem.Balance - productMovement.Quantity < 0)
                 {
@@ -27,7 +28,7 @@ namespace StockControl.Application.Core.Services
                 }
             }
 
-            return this._productMovementManager.AddProductMovement(productMovement.ToModel());
+            return this._productMovementManager.AddProductMovement(productMovement);
         }
     }
 }

@@ -19,9 +19,22 @@ namespace StockControl.API.Controllers
 
         // POST api/<ProductMovementController>
         [HttpPost]
-        public void Post([FromBody] ProductMovementDTO movement)
+        public IActionResult Post([FromBody] ProductMovementDTO movement)
         {
-            this._productMovementService.AddProductMovement(movement);
+            try
+            {
+                int productMovementId = this._productMovementService.AddProductMovement(movement.ToModel());
+                return Ok(productMovementId);
+            }
+            catch (ApplicationException ex)
+            {
+                return Problem(ex.Message);
+            }
+            catch(Exception ex)
+            {
+                //TODO: Enhancement to be done: Log the exception
+                return Problem("An error occurred while adding the product movement.");
+            }
         }
     }
 }
