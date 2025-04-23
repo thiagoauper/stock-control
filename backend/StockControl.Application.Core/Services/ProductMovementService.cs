@@ -18,6 +18,8 @@ namespace StockControl.Application.Core.Services
 
         public int AddProductMovement(ProductMovement productMovement)
         {
+            productMovement.Validate();
+
             if(productMovement.MovementType == Domain.Enums.ProductMovementType.Outbound)
             {
                 StockReportItemDTO stockReportItem = _stockReportService.GetProductStock(productMovement.CreationDate, productMovement.Product.Code);
