@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StockReportService } from '../../services/stock-report.service';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-stock-report',
-  imports: [ FormsModule, CommonModule, MatInputModule ],
+  imports: [ FormsModule, CommonModule, MatInputModule, MatButtonModule ],
   templateUrl: './stock-report.component.html',
   styleUrl: './stock-report.component.scss'
 })
