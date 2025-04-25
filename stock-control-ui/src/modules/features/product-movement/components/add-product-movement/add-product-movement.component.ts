@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductMovementService } from '../../services/product-movement.service';
 import { ProductMovementModel } from '../../models/product-movement-model';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-add-product-movement',
   templateUrl: './add-product-movement.component.html',
   styleUrl: './add-product-movement.component.scss',
-  imports: [ FormsModule ],
+  imports: [ FormsModule, MatInputModule ],
 })
 export class AddProductMovementComponent {
 

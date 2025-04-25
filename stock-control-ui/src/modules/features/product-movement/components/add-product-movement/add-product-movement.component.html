@@ -1,27 +1,33 @@
 <div class="form-group align-center">
     <h2>Add Product Movement</h2>
 
-    <div>
-        <label for="productCode">Product Code</label>
-        <input type="text" id="productCode" class="form-control" placeholder="Enter code" [(ngModel)]="productMovement.productCode">
-    </div>
+    <form>
+        <div>
+            <mat-form-field>
+                <mat-label>Product Code</mat-label>
+                <input matInput type="text" id="productCode" name="productCode" placeholder="Enter code" [(ngModel)]="productMovement.productCode">
+            </mat-form-field>
+        </div>
 
-    <div>
-        <label for="productMovementType">Movement Type</label>
-        <select id="productMovementType" class="form-control" [(ngModel)]="productMovement.movementType">
-            <option value="" disabled selected>Select an option</option>
-            <option value="0">Inbound</option>
-            <option value="1">Outbound</option>
-        </select>
-    </div>
+        <div>
+            <label for="productMovementType">Movement Type</label>
+            <select id="productMovementType" name="productMovementType" class="form-control" [(ngModel)]="productMovement.movementType">
+                <option value="" disabled selected>Select an option</option>
+                <option value="0">Inbound</option>
+                <option value="1">Outbound</option>
+            </select>
+        </div>
 
-    <div>
-        <label for="productQuantity">Quantity</label>
-        <input type="text" id="productQuantity" class="form-control" placeholder="Enter quantity" [(ngModel)]="productMovement.quantity">
-    </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Quantity</mat-label>
+                <input matInput type="text" id="productQuantity" name="productQuantity" class="form-control" placeholder="Enter quantity" [(ngModel)]="productMovement.quantity">
+            </mat-form-field>
+        </div>
 
-    <div>
-        <button mat-raised-button color="primary" (click)="addProductMovement()">Add Movement</button>
-    </div>
+        <div>
+            <button mat-raised-button color="primary" (click)="addProductMovement()">Add Movement</button>
+        </div>
+    </form>
 
 </div>
