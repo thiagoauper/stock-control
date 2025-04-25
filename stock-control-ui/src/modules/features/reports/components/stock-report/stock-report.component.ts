@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StockReportService } from '../../services/stock-report.service';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-stock-report',
-  imports: [ FormsModule, CommonModule ],
+  imports: [ FormsModule, CommonModule, MatInputModule ],
   templateUrl: './stock-report.component.html',
   styleUrl: './stock-report.component.scss'
 })

@@ -7,8 +7,10 @@
     </div>
     
     <div>
-        <label for="productCode">Product Code</label>
-        <input type="text" id="productCode" class="form-control" placeholder="Enter code" [(ngModel)]="productCode">
+        <mat-form-field>
+            <mat-label>Product Code</mat-label>
+            <input matInput type="text" id="productCode" name="productCode" placeholder="Enter code" [(ngModel)]="productCode">
+        </mat-form-field>
     </div>
     
     <div>
