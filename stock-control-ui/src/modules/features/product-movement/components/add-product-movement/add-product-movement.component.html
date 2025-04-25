@@ -10,12 +10,13 @@
         </div>
 
         <div>
-            <label for="productMovementType">Movement Type</label>
-            <select id="productMovementType" name="productMovementType" class="form-control" [(ngModel)]="productMovement.movementType">
-                <option value="" disabled selected>Select an option</option>
-                <option value="0">Inbound</option>
-                <option value="1">Outbound</option>
-            </select>
+            <mat-form-field>
+                <mat-label>Movement Type</mat-label>
+                <mat-select id="productMovementType" name="productMovementType" class="form-control" [(ngModel)]="productMovement.movementType">
+                    <mat-option [value]="0">Inbound</mat-option>
+                    <mat-option [value]="1">Outbound</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
 
         <div>

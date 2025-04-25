@@ -4,12 +4,13 @@ import { ProductMovementService } from '../../services/product-movement.service'
 import { ProductMovementModel } from '../../models/product-movement-model';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-add-product-movement',
   templateUrl: './add-product-movement.component.html',
   styleUrl: './add-product-movement.component.scss',
-  imports: [ FormsModule, MatInputModule, MatButtonModule ],
+  imports: [ FormsModule, MatInputModule, MatButtonModule, MatSelectModule ],
 })
 export class AddProductMovementComponent {
 
