@@ -2,8 +2,13 @@
     <h2>Stock Report</h2>
     
     <div>
-        <label for="movementDate">Movement Date</label>
-        <input type="date" id="movementDate" class="form-control" [(ngModel)]="movementDate">
+        <mat-form-field>
+            <mat-label>Movement Date</mat-label>
+            <input matInput [matDatepicker]="picker" [formControl]="date">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
     </div>
     
     <div>

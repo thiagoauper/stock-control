@@ -10,7 +10,8 @@ export class StockReportService {
   constructor(private http: HttpClient) { }
 
   fetchStockReport(movementDate: Date, productCode: string): Observable<any> {
-    var apiUrl : string = 'http://localhost:5053/api/StockReport/' + movementDate;
+    var movementDateString = movementDate.getFullYear() + '-' + (movementDate.getMonth() + 1) + '-' + movementDate.getDate();
+    var apiUrl : string = 'http://localhost:5053/api/StockReport/' + movementDateString;
 
     if(productCode) {
       apiUrl += '/' + productCode;

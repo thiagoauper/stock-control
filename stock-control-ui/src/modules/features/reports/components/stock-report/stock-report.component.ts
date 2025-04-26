@@ -1,18 +1,29 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StockReportService } from '../../services/stock-report.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-stock-report',
-  imports: [ FormsModule, CommonModule, MatInputModule, MatButtonModule ],
+  providers: [provideNativeDateAdapter()],
+  imports: [ 
+    FormsModule, 
+    CommonModule, 
+    MatInputModule, 
+    MatButtonModule, 
+    MatDatepickerModule, 
+    ReactiveFormsModule,
+   ],
   templateUrl: './stock-report.component.html',
   styleUrl: './stock-report.component.scss'
 })
 export class StockReportComponent {
 
+  readonly date = new FormControl(new Date());
   movementDate: Date = new Date();
   productCode: string = '';
 
@@ -44,7 +55,11 @@ export class StockReportComponent {
   }
 
   generateReport() {
-    if(!this.movementDate || this.movementDate.toString().length !== 10) {
+    if(this.date?.value) {
+      this.movementDate = this.date.value;
+    }
+
+    if(!this.movementDate) {
       alert('Please inform a Movement Date!');
       return;
     }
