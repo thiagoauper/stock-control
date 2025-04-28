@@ -27,7 +27,7 @@ namespace StockControl.API.Controllers
             catch (Exception ex)
             {
                 //TODO: Enhancement to be done: Log the exception
-                return Problem("An error occurred while adding the product movement.");
+                return Problem("An error occurred while executing call to the API.");
             }
         } 
     }
