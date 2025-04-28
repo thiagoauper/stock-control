@@ -8,7 +8,7 @@ namespace StockControl.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductMovementController : ControllerBase
+    public class ProductMovementController : StockControlControllerBase
     {
         private readonly IProductMovementService _productMovementService;
 
@@ -21,28 +21,11 @@ namespace StockControl.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] ProductMovementDTO movement)
         {
-            try
+            return EncapsulateAction(() =>
             {
                 int productMovementId = this._productMovementService.AddProductMovement(movement.ToModel());
-                return Ok(productMovementId);
-            }
-            catch (ArgumentNullException ex)
-            {
-                return Problem(ex.Message);
-            }
-            catch (ArgumentException ex)
-            {
-                return Problem(ex.Message);
-            }
-            catch (ApplicationException ex)
-            {
-                return Problem(ex.Message);
-            }
-            catch(Exception ex)
-            {
-                //TODO: Enhancement to be done: Log the exception
-                return Problem("An error occurred while adding the product movement.");
-            }
+                return productMovementId;
+            });
         }
     }
 }

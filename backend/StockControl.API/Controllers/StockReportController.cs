@@ -8,7 +8,7 @@ namespace StockControl.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StockReportController : ControllerBase
+    public class StockReportController : StockControlControllerBase
     {
         private readonly IStockReportService _stockReportService;
 
@@ -21,40 +21,22 @@ namespace StockControl.API.Controllers
         [HttpGet("{movementDate}")]
         public IActionResult Get(DateTime movementDate)
         {
-            try
+            return EncapsulateAction(() =>
             {
                 IEnumerable<StockReportItemDTO> stockReportItems = _stockReportService.GetStockReport(movementDate, null);
-                return Ok(stockReportItems);
-            }
-            catch (ApplicationException ex)
-            {
-                return Problem(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                //TODO: Enhancement to be done: Log the exception
-                return Problem("An error occurred while fetching stock report.");
-            }
+                return stockReportItems;
+            });
         }
 
         // GET: api/<ReportController>/movementDate/productCode
         [HttpGet("{movementDate}/{productCode}")]
         public IActionResult Get(DateTime movementDate, string productCode)
         {
-            try
+            return EncapsulateAction(() =>
             {
                 IEnumerable<StockReportItemDTO> stockReportItems = _stockReportService.GetStockReport(movementDate, productCode);
-                return Ok(stockReportItems);
-            }
-            catch (ApplicationException ex)
-            {
-                return Problem(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                //TODO: Enhancement to be done: Log the exception
-                return Problem("An error occurred while fetching stock report.");
-            }
+                return stockReportItems;
+            });
         }
     }
 }
