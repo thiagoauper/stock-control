@@ -21,7 +21,9 @@ namespace StockControl.API.UnitTests
         public void Given_ProductMovement_When_AllRequiredFieldsAreDefined_Then_ValidationMethodReturnsTrue()
         {
             ProductMovementDTO productMovement = CreateValidProductMovement();
-            Assert.True(productMovement.IsValid());
+            ProductMovement pm = productMovement.ToModel();
+
+            pm.Validate(); //should not throw any exception
         }
 
         /// <summary>
@@ -32,7 +34,9 @@ namespace StockControl.API.UnitTests
         {
             ProductMovementDTO productMovement = CreateValidProductMovement();
             productMovement.ProductCode = null;
-            Assert.False(productMovement.IsValid());
+
+            ProductMovement pm = productMovement.ToModel();
+            Assert.Throws<ArgumentException>(() => pm.Validate());
         }
 
         /// <summary>
@@ -43,7 +47,9 @@ namespace StockControl.API.UnitTests
         {
             ProductMovementDTO productMovement = CreateValidProductMovement();
             productMovement.Quantity = 0;
-            Assert.False(productMovement.IsValid());
+
+            ProductMovement pm = productMovement.ToModel();
+            Assert.Throws<ArgumentException>(() => pm.Validate());
         }
 
         /// <summary>
@@ -54,7 +60,9 @@ namespace StockControl.API.UnitTests
         {
             ProductMovementDTO productMovement = CreateValidProductMovement();
             productMovement.Quantity = -1 * new Random().Next();
-            Assert.False(productMovement.IsValid());
+
+            ProductMovement pm = productMovement.ToModel();
+            Assert.Throws<ArgumentException>(() => pm.Validate());
         }
 
         /// <summary>

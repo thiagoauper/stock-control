@@ -9,12 +9,6 @@ namespace StockControl.Domain.DTOs
         public int MovementType { get; set; }
         public int Quantity { get; set; }
 
-        public bool IsValid()
-        {
-            //TODO: This method is no longer necessary, as the validation is done in the ProductMovement class. Remove it when possible.
-            return !string.IsNullOrWhiteSpace(ProductCode) && Quantity > 0;
-        }
-
         public ProductMovement ToModel()
         {
             ProductMovementType movementType = Enum.Parse<ProductMovementType>(MovementType.ToString());
