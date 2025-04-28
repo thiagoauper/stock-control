@@ -29,5 +29,10 @@ namespace StockControl.DataAccess.EntityFramework.Repositories
         {
             return _stockControlDbContext.Product.ToList();
         }
+
+        public Product GetProductByCode(string productCode)
+        {
+            return _stockControlDbContext.Product.SingleOrDefault(p => p.Code == productCode);
+        }
     }
 }

@@ -31,14 +31,7 @@ namespace StockControl.DataAccess.EntityFramework.Repositories
         /// <param name="productMovement">The product movement to add.</param>
         public int AddProductMovement(ProductMovement productMovement)
         {
-            if (productMovement == null)
-                throw new ArgumentNullException(nameof(productMovement));
-
-            Product selectedProduct = _stockControlDbContext.Product.SingleOrDefault(p => p.Code == productMovement.Product.Code);
-            if(selectedProduct == null)
-            {
-                throw new ApplicationException($"There is no product with code '{productMovement.Product.Code}'.");
-            }
+            Product selectedProduct = _stockControlDbContext.Product.Single(p => p.Code == productMovement.Product.Code);
             
             productMovement.Product = selectedProduct;
             productMovement.ProductId = selectedProduct.Id;

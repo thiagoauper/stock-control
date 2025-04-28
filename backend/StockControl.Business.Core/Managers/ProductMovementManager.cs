@@ -7,10 +7,12 @@ namespace StockControl.Business.Managers
     public class ProductMovementManager : IProductMovementManager
     {
         private readonly IProductMovementRepository _productMovementRepository;
+        private readonly IProductRepository _productRepository;
 
-        public ProductMovementManager(IProductMovementRepository productMovementRepository)
+        public ProductMovementManager(IProductMovementRepository productMovementRepository, IProductRepository productRepository)
         {
             this._productMovementRepository = productMovementRepository;
+            this._productRepository = productRepository;
         }
 
         public int AddProductMovement(ProductMovement productMovement)
@@ -24,6 +26,12 @@ namespace StockControl.Business.Managers
                               $"MovementType={productMovement.MovementType}, " +
                               $"Quantity={productMovement.Quantity}, " +
                               $"Date={productMovement.CreationDate}");
+
+            Product selectedProduct = this._productRepository.GetProductByCode(productMovement.Product.Code);
+            if (selectedProduct == null)
+            {
+                throw new ApplicationException($"There is no product with code '{productMovement.Product.Code}'.");
+            }
 
             int productMovementId = this._productMovementRepository.AddProductMovement(productMovement);
 
