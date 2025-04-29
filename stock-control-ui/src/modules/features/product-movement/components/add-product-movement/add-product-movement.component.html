@@ -5,14 +5,14 @@
         <div>
             <mat-form-field>
                 <mat-label>Product Code</mat-label>
-                <input matInput type="text" id="productCode" name="productCode" placeholder="Enter code" [(ngModel)]="productMovement.productCode">
+                <input matInput type="text" id="productCode" name="productCode" placeholder="Enter code" [(ngModel)]="productMovement.productCode" >
             </mat-form-field>
         </div>
 
         <div>
             <mat-form-field>
                 <mat-label>Movement Type</mat-label>
-                <mat-select id="productMovementType" name="productMovementType" class="form-control" [(ngModel)]="productMovement.movementType">
+                <mat-select id="productMovementType" name="productMovementType" class="form-control" [(ngModel)]="productMovement.movementType" #myInput required>
                     <mat-option [value]="0">Inbound</mat-option>
                     <mat-option [value]="1">Outbound</mat-option>
                 </mat-select>

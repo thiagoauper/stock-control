@@ -4,14 +4,8 @@ using StockControl.Application.Core.Services;
 using StockControl.Application.Interfaces.Services;
 using StockControl.Business.Interfaces.Managers;
 using StockControl.Business.Managers;
-using StockControl.DataAccess.EntityFramework.Repositories;
 using StockControl.DataAccess.Interfaces.Repositories;
 using StockControl.Domain.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StockControl.API.IntegrationTests
 {
