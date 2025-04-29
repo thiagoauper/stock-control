@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductMovementService } from '../../services/product-movement.service';
 import { ProductMovementModel } from '../../models/product-movement-model';
@@ -14,15 +14,9 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class AddProductMovementComponent {
 
-  @ViewChild('myInput') productCodeField!: ElementRef;
-  
   productMovement: ProductMovementModel = new ProductMovementModel('', 0, 0);
 
   constructor(private productMovementService: ProductMovementService) { }
-
-  ngAfterViewInit() {
-    this.productCodeField.nativeElement.focus();
-  }
 
   addProductMovement() {
     console.log('Product Movement:', this.productMovement);
