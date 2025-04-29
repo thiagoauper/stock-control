@@ -212,3 +212,6 @@
 /backend/StockControl.API.UnitTests/obj/
 /backend/StockControl.API/obj/
 /backend/StockControl.API/appsettings.Development.json
+/backend/StockControl.API.IntegrationTests/bin/Debug/net8.0/appsettings.Development.json
+/backend/StockControl.API.IntegrationTests/bin/
+/backend/StockControl.API.IntegrationTests/obj/
