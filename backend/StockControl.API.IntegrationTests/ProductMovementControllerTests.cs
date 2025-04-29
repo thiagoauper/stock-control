@@ -51,8 +51,10 @@ namespace StockControl.API.IntegrationTests
             productMovement.ProductCode = null;
 
             IActionResult actionResult = productMovementController.Post(productMovement);
-
-            //Assert.IsType<Problem>(actionResult); //TODO: Make sure it returns a Problem result and Assert its error message
+            Assert.IsType<ObjectResult>(actionResult);
+            ObjectResult problem = (ObjectResult)actionResult;
+            ProblemDetails problemDetails = (ProblemDetails)problem.Value;
+            Assert.Equal("Product code is required. (Parameter 'Code')", problemDetails.Detail);
         }
 
         private ProductMovementDTO CreateValidProductMovement()
