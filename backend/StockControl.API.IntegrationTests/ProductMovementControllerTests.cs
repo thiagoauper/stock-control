@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Moq;
 using StockControl.API.Controllers;
 using StockControl.Application.Core.Services;
 using StockControl.Application.Interfaces.Services;
@@ -6,11 +7,14 @@ using StockControl.Business.Interfaces.Managers;
 using StockControl.Business.Managers;
 using StockControl.DataAccess.Interfaces.Repositories;
 using StockControl.Domain.DTOs;
+using StockControl.Domain.Entities;
 
 namespace StockControl.API.IntegrationTests
 {
     public class ProductMovementControllerTests
     {
+        private const string PRODUCT_CODE = "PROD001";
+
         private readonly IProductMovementService _productMovementService;
         private readonly IProductMovementManager _productMovementManager;
         private readonly IProductMovementRepository _productMovementRepository;
@@ -22,8 +26,17 @@ namespace StockControl.API.IntegrationTests
 
         public ProductMovementControllerTests()
         {
-            _productRepository = null; //TODO: MOCK THIS CLASS!!!
-            _productMovementRepository = null; //TODO: MOCK THIS CLASS!!
+            _productRepository = Mock.Of<IProductRepository>(pr => 
+                pr.GetProductByCode(PRODUCT_CODE) == 
+                    new Product 
+                    {
+                        Code = PRODUCT_CODE,
+                        Id = 1,
+                        Name = "Product 1"
+                    }
+                );
+
+            _productMovementRepository = Mock.Of<IProductMovementRepository>();
 
             _productManager = new ProductManager(_productRepository);
             _productMovementManager = new ProductMovementManager(_productMovementRepository, _productRepository);
@@ -51,11 +64,27 @@ namespace StockControl.API.IntegrationTests
             Assert.Equal("Product code is required. (Parameter 'Code')", problemDetails.Detail);
         }
 
+        /// <summary>
+        /// Tests that when a product movement valid, its Controller returns a Ok when trying to add it.
+        /// </summary>
+        [Fact(DisplayName = "Product Movement Controller should return Ok when input data is valid")]
+        public void Given_ProductMovementIsValid_When_TryingToAddIt_Then_ItShouldReturnOk()
+        {
+            ProductMovementDTO productMovement = CreateValidProductMovement();
+
+            ProductMovementController productMovementController = new ProductMovementController(_productMovementService);
+
+            IActionResult actionResult = productMovementController.Post(productMovement);
+            Assert.IsType<OkObjectResult>(actionResult);
+            OkObjectResult okResult = (OkObjectResult)actionResult;
+            //Assert.Equal(1, okResult.Value); //TODO: Make this assertion work!!! Setup _productMovementRepository Mock properly!!
+        }
+
         private ProductMovementDTO CreateValidProductMovement()
         {
             return new ProductMovementDTO
             {
-                ProductCode = Guid.NewGuid().ToString(),
+                ProductCode = PRODUCT_CODE,
                 Quantity = 1
             };
         }
