@@ -14,6 +14,7 @@ namespace StockControl.API.IntegrationTests
     public class ProductMovementControllerTests
     {
         private const string PRODUCT_CODE = "PROD001";
+        private const int PRODUCT_ID = 123;
 
         private readonly IProductMovementService _productMovementService;
         private readonly IProductMovementManager _productMovementManager;
@@ -36,7 +37,9 @@ namespace StockControl.API.IntegrationTests
                     }
                 );
 
-            _productMovementRepository = Mock.Of<IProductMovementRepository>();
+            var productMovementRepositoryMock = new Mock<IProductMovementRepository>();
+            productMovementRepositoryMock.Setup(pmr => pmr.AddProductMovement(It.IsAny<ProductMovement>())).Returns(PRODUCT_ID);
+            _productMovementRepository = productMovementRepositoryMock.Object;
 
             _productManager = new ProductManager(_productRepository);
             _productMovementManager = new ProductMovementManager(_productMovementRepository, _productRepository);
@@ -77,7 +80,7 @@ namespace StockControl.API.IntegrationTests
             IActionResult actionResult = productMovementController.Post(productMovement);
             Assert.IsType<OkObjectResult>(actionResult);
             OkObjectResult okResult = (OkObjectResult)actionResult;
-            //Assert.Equal(1, okResult.Value); //TODO: Make this assertion work!!! Setup _productMovementRepository Mock properly!!
+            Assert.Equal(PRODUCT_ID, okResult.Value);
         }
 
         private ProductMovementDTO CreateValidProductMovement()
