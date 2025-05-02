@@ -8,13 +8,14 @@ using StockControl.Business.Managers;
 using StockControl.DataAccess.Interfaces.Repositories;
 using StockControl.Domain.DTOs;
 using StockControl.Domain.Entities;
+using StockControl.Domain.Enums;
 
 namespace StockControl.API.IntegrationTests
 {
     public class ProductMovementControllerTests
     {
-        private const string PRODUCT_CODE = "PROD001";
-        private const int PRODUCT_ID = 123;
+        private readonly Product PRODUCT_MOCK;
+        private readonly ProductMovement PRODUCT_MOVEMENT_MOCK;
 
         private readonly IProductMovementService _productMovementService;
         private readonly IProductMovementManager _productMovementManager;
@@ -27,18 +28,27 @@ namespace StockControl.API.IntegrationTests
 
         public ProductMovementControllerTests()
         {
-            _productRepository = Mock.Of<IProductRepository>(pr => 
-                pr.GetProductByCode(PRODUCT_CODE) == 
-                    new Product 
-                    {
-                        Code = PRODUCT_CODE,
-                        Id = 1,
-                        Name = "Product 1"
-                    }
+            PRODUCT_MOCK = new Product
+            {
+                Code = "PROD001",
+                Id = 123,
+                Name = "Product 1"
+            };
+
+            PRODUCT_MOVEMENT_MOCK = new ProductMovement(PRODUCT_MOCK, ProductMovementType.Inbound, 10)
+            {
+                Id = 456,
+                ProductId = PRODUCT_MOCK.Id,
+            };  
+
+            _productRepository = Mock.Of<IProductRepository>(pr =>
+                pr.GetProductByCode(PRODUCT_MOCK.Code) == PRODUCT_MOCK
+                && pr.GetAllProducts() == new List<Product>{ PRODUCT_MOCK }
                 );
 
             var productMovementRepositoryMock = new Mock<IProductMovementRepository>();
-            productMovementRepositoryMock.Setup(pmr => pmr.AddProductMovement(It.IsAny<ProductMovement>())).Returns(PRODUCT_ID);
+            productMovementRepositoryMock.Setup(pmr => pmr.AddProductMovement(It.IsAny<ProductMovement>())).Returns(PRODUCT_MOCK.Id);
+            productMovementRepositoryMock.Setup(pmr => pmr.GetAllProductMovements()).Returns(new List<ProductMovement> { PRODUCT_MOVEMENT_MOCK });
             _productMovementRepository = productMovementRepositoryMock.Object;
 
             _productManager = new ProductManager(_productRepository);
@@ -87,6 +97,26 @@ namespace StockControl.API.IntegrationTests
         }
 
         /// <summary>
+        /// Tests that when a product movement is of type outbound and its quantity is greater then the product's stock, its Controller returns a Problem.
+        /// </summary>
+        [Fact(DisplayName = "Product Movement Controller should return a Problem when product outbound quantity is greater than the available stock")]
+        public void Given_ProductMovement_When_ProductOutboundQuantityIsGreaterThenAvailableStock_Then_ProblemIsReturned()
+        {
+            ProductMovementDTO productMovement = CreateValidProductMovement();
+
+            ProductMovementController productMovementController = new ProductMovementController(_productMovementService);
+
+            productMovement.MovementType = (int)ProductMovementType.Outbound;
+            productMovement.Quantity = PRODUCT_MOVEMENT_MOCK.Quantity + 1;
+
+            IActionResult actionResult = productMovementController.Post(productMovement);
+            Assert.IsType<ObjectResult>(actionResult);
+            ObjectResult problem = (ObjectResult)actionResult;
+            ProblemDetails problemDetails = (ProblemDetails)problem.Value;
+            Assert.Equal("It is not possible to make a Product Movement which leads to a negative balance.", problemDetails.Detail);
+        }
+
+        /// <summary>
         /// Tests that when a product movement valid, its Controller returns a Ok when trying to add it.
         /// </summary>
         [Fact(DisplayName = "Product Movement Controller should return Ok when input data is valid")]
@@ -99,14 +129,14 @@ namespace StockControl.API.IntegrationTests
             IActionResult actionResult = productMovementController.Post(productMovement);
             Assert.IsType<OkObjectResult>(actionResult);
             OkObjectResult okResult = (OkObjectResult)actionResult;
-            Assert.Equal(PRODUCT_ID, okResult.Value);
+            Assert.Equal(PRODUCT_MOCK.Id, okResult.Value);
         }
 
         private ProductMovementDTO CreateValidProductMovement()
         {
             return new ProductMovementDTO
             {
-                ProductCode = PRODUCT_CODE,
+                ProductCode = PRODUCT_MOCK.Code,
                 Quantity = 1
             };
         }
