@@ -68,6 +68,25 @@ namespace StockControl.API.IntegrationTests
         }
 
         /// <summary>
+        /// Tests that when a product movement is created without quantity, its Controller returns a Problem.
+        /// </summary>
+        [Fact(DisplayName = "Product Movement Controller should return a Problem when product quantity is not defined")]
+        public void Given_ProductMovement_When_ProductQuantityIsUndefined_Then_ProblemIsReturned()
+        {
+            ProductMovementDTO productMovement = CreateValidProductMovement();
+
+            ProductMovementController productMovementController = new ProductMovementController(_productMovementService);
+
+            productMovement.Quantity = 0;
+
+            IActionResult actionResult = productMovementController.Post(productMovement);
+            Assert.IsType<ObjectResult>(actionResult);
+            ObjectResult problem = (ObjectResult)actionResult;
+            ProblemDetails problemDetails = (ProblemDetails)problem.Value;
+            Assert.Equal("Quantity should be positive. (Parameter 'Quantity')", problemDetails.Detail);
+        }
+
+        /// <summary>
         /// Tests that when a product movement valid, its Controller returns a Ok when trying to add it.
         /// </summary>
         [Fact(DisplayName = "Product Movement Controller should return Ok when input data is valid")]
