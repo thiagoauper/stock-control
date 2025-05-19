@@ -215,3 +215,7 @@
 /backend/StockControl.API.IntegrationTests/bin/Debug/net8.0/appsettings.Development.json
 /backend/StockControl.API.IntegrationTests/bin/
 /backend/StockControl.API.IntegrationTests/obj/
+/backend/StockControl.Logging.Interfaces/obj/
+/backend/StockControl.Logging.Interfaces/bin/
+/backend/StockControl.Logging.log4net/bin/
+/backend/StockControl.Logging.log4net/obj/

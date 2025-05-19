@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockControl.API.UnitTests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockControl.API.IntegrationTests", "StockControl.API.IntegrationTests\StockControl.API.IntegrationTests.csproj", "{DFF188C4-41D1-40CE-91C9-627E382A04C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockControl.Logging.Interfaces", "StockControl.Logging.Interfaces\StockControl.Logging.Interfaces.csproj", "{2F3C2343-D2D2-4ADE-988B-B083217FB8D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockControl.Logging.log4net", "StockControl.Logging.log4net\StockControl.Logging.log4net.csproj", "{6B8837B8-DB3D-4E94-A283-5E198AD36051}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{DFF188C4-41D1-40CE-91C9-627E382A04C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFF188C4-41D1-40CE-91C9-627E382A04C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFF188C4-41D1-40CE-91C9-627E382A04C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F3C2343-D2D2-4ADE-988B-B083217FB8D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F3C2343-D2D2-4ADE-988B-B083217FB8D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F3C2343-D2D2-4ADE-988B-B083217FB8D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F3C2343-D2D2-4ADE-988B-B083217FB8D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B8837B8-DB3D-4E94-A283-5E198AD36051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B8837B8-DB3D-4E94-A283-5E198AD36051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B8837B8-DB3D-4E94-A283-5E198AD36051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B8837B8-DB3D-4E94-A283-5E198AD36051}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
