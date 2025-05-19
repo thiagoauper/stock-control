@@ -2,7 +2,7 @@
 
 namespace StockControl.Logging.log4net.Loggers
 {
-    internal class Logger : ILogger
+    public class Logger : ILogger
     {
         public void LogDebug(string message)
         {

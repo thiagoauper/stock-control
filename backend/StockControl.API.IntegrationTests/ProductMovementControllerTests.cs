@@ -9,6 +9,7 @@ using StockControl.DataAccess.Interfaces.Repositories;
 using StockControl.Domain.DTOs;
 using StockControl.Domain.Entities;
 using StockControl.Domain.Enums;
+using StockControl.Logging.Interfaces.Loggers;
 
 namespace StockControl.API.IntegrationTests
 {
@@ -25,6 +26,8 @@ namespace StockControl.API.IntegrationTests
         private readonly IProductRepository _productRepository;
         
         private readonly IStockReportService _stockReportService;
+
+        private readonly ILogger _logger;
 
         public ProductMovementControllerTests()
         {
@@ -56,6 +59,8 @@ namespace StockControl.API.IntegrationTests
 
             _stockReportService = new StockReportService(_productMovementManager, _productManager);
             _productMovementService = new ProductMovementService(_productMovementManager, _stockReportService);
+            
+            _logger = new Mock<ILogger>().Object;
         }
 
         /// <summary>
@@ -66,7 +71,7 @@ namespace StockControl.API.IntegrationTests
         {
             ProductMovementDTO productMovement = CreateValidProductMovement();
 
-            ProductMovementController productMovementController = new ProductMovementController(_productMovementService);
+            ProductMovementController productMovementController = new ProductMovementController(_productMovementService, _logger);
 
             productMovement.ProductCode = null;
 
@@ -85,7 +90,7 @@ namespace StockControl.API.IntegrationTests
         {
             ProductMovementDTO productMovement = CreateValidProductMovement();
 
-            ProductMovementController productMovementController = new ProductMovementController(_productMovementService);
+            ProductMovementController productMovementController = new ProductMovementController(_productMovementService, _logger);
 
             productMovement.Quantity = 0;
 
@@ -104,7 +109,7 @@ namespace StockControl.API.IntegrationTests
         {
             ProductMovementDTO productMovement = CreateValidProductMovement();
 
-            ProductMovementController productMovementController = new ProductMovementController(_productMovementService);
+            ProductMovementController productMovementController = new ProductMovementController(_productMovementService, _logger);
 
             productMovement.MovementType = (int)ProductMovementType.Outbound;
             productMovement.Quantity = PRODUCT_MOVEMENT_MOCK.Quantity + 1;
@@ -124,7 +129,7 @@ namespace StockControl.API.IntegrationTests
         {
             ProductMovementDTO productMovement = CreateValidProductMovement();
 
-            ProductMovementController productMovementController = new ProductMovementController(_productMovementService);
+            ProductMovementController productMovementController = new ProductMovementController(_productMovementService, _logger);
 
             IActionResult actionResult = productMovementController.Post(productMovement);
             Assert.IsType<OkObjectResult>(actionResult);

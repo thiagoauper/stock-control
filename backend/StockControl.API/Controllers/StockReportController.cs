@@ -12,7 +12,7 @@ namespace StockControl.API.Controllers
     {
         private readonly IStockReportService _stockReportService;
 
-        public StockReportController(IStockReportService stockReportService)
+        public StockReportController(IStockReportService stockReportService, Logging.Interfaces.Loggers.ILogger logger) : base(logger)
         {
             this._stockReportService = stockReportService;
         }

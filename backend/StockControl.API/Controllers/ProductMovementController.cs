@@ -12,7 +12,7 @@ namespace StockControl.API.Controllers
     {
         private readonly IProductMovementService _productMovementService;
 
-        public ProductMovementController(IProductMovementService productMovementService)
+        public ProductMovementController(IProductMovementService productMovementService, Logging.Interfaces.Loggers.ILogger logger) : base (logger)
         {
             this._productMovementService = productMovementService;
         }
@@ -24,6 +24,7 @@ namespace StockControl.API.Controllers
             return EncapsulateAction(() =>
             {
                 int productMovementId = this._productMovementService.AddProductMovement(movement.ToModel());
+                _logger.LogInformation($"Product movement with ID {productMovementId} added successfully.");
                 return productMovementId;
             });
         }

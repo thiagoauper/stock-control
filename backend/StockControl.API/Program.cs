@@ -5,6 +5,8 @@ using StockControl.Business.Managers;
 using StockControl.DataAccess.Interfaces.Repositories;
 using StockControl.DataAccess.EntityFramework.Repositories;
 using StockControl.DataAccess.EntityFramework;
+using Logging = StockControl.Logging.Interfaces.Loggers;
+using StockControl.Logging.log4net.Loggers;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -27,6 +29,8 @@ builder.Services.AddSingleton<IProductManager, ProductManager>();
 builder.Services.AddSingleton<IProductRepository, ProductRepository>();
 
 builder.Services.AddSingleton<IStockReportService, StockReportService>();
+
+builder.Services.AddSingleton<Logging.ILogger, Logger>();
 
 var allowOrigins = "AllowAll";
 

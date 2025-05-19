@@ -4,7 +4,14 @@ namespace StockControl.API.Controllers
 {
     public abstract class StockControlControllerBase : ControllerBase
     {
+        protected readonly Logging.Interfaces.Loggers.ILogger _logger;
+
         public delegate T ActionToBeExecuted<T>();
+
+        protected StockControlControllerBase(Logging.Interfaces.Loggers.ILogger logger)
+        {
+            this._logger = logger;
+        }
 
         public IActionResult EncapsulateAction<T>(ActionToBeExecuted<T> action)
         {
@@ -26,7 +33,7 @@ namespace StockControl.API.Controllers
             }
             catch (Exception ex)
             {
-                //TODO: Enhancement to be done: Log the exception
+                this._logger.LogError("An error occurred while executing the action.", ex);
                 return Problem("An error occurred while executing call to the API.");
             }
         } 

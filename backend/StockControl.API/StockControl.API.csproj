@@ -18,6 +18,8 @@
     <ProjectReference Include="..\StockControl.DataAccess.EntityFramework\StockControl.DataAccess.EntityFramework.csproj" />
     <ProjectReference Include="..\StockControl.DataAccess.Interfaces\StockControl.DataAccess.Interfaces.csproj" />
     <ProjectReference Include="..\StockControl.Domain\StockControl.Domain.csproj" />
+    <ProjectReference Include="..\StockControl.Logging.Interfaces\StockControl.Logging.Interfaces.csproj" />
+    <ProjectReference Include="..\StockControl.Logging.log4net\StockControl.Logging.log4net.csproj" />
   </ItemGroup>
 
 </Project>

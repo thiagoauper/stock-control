@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StockControl.API\StockControl.API.csproj" />
+    <ProjectReference Include="..\StockControl.Logging.Interfaces\StockControl.Logging.Interfaces.csproj" />
   </ItemGroup>
 
   <ItemGroup>
