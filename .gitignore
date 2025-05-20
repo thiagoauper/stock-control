@@ -221,3 +221,4 @@
 /backend/StockControl.Logging.log4net/obj/
 /backend/StockControl.Logging.SCSerilog/obj/
 /backend/StockControl.Logging.SCSerilog/bin/
+/backend/StockControl.API/log.txt

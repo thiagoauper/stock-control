@@ -1,24 +1,39 @@
-﻿using StockControl.Logging.Interfaces.Loggers;
+﻿using Serilog;
+using Serilog.Core;
+using StockControl.Logging.Interfaces.Loggers;
 
 namespace StockControl.Logging.SCSerilog.Loggers
 {
-    public class SCLogger : IStockControlLogger
+    public class SCLogger : IStockControlLogger, IDisposable
     {
+        private readonly Logger _log;
+
+        public SCLogger()
+        {
+            _log = new LoggerConfiguration()
+                .WriteTo.File("log.txt") //TODO: This can be retrieved from a configuration file in the future.
+                .CreateLogger();
+        }
         public void LogDebug(string message)
         {
-            throw new NotImplementedException();
+            _log.Debug(message);
         }
         public void LogError(string message, Exception exception)
         {
-            throw new NotImplementedException();
+            _log.Error(exception, message);
         }
         public void LogInformation(string message)
         {
-            throw new NotImplementedException();
+            _log.Information(message);
         }
         public void LogWarning(string message)
         {
-            throw new NotImplementedException();
+            _log.Warning(message);
+        }
+
+        public void Dispose()
+        {
+            _log.Dispose();
         }
     }
 }
