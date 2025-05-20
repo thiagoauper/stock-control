@@ -22,14 +22,18 @@ namespace StockControl.API.Controllers
             }
             catch (ArgumentNullException ex)
             {
+                this._logger.LogWarning(ex.Message);
                 return Problem(ex.Message);
             }
             catch (ArgumentException ex)
             {
+                this._logger.LogWarning(ex.Message);
                 return Problem(ex.Message);
             }
             catch (ApplicationException ex)
             {
+
+                this._logger.LogWarning(ex.Message);
                 return Problem(ex.Message);
             }
             catch (Exception ex)

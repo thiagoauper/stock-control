@@ -6,6 +6,5 @@
         void LogWarning(string message);
         void LogInformation(string message);
         void LogDebug(string message);
-        void LogTrace(string message);
     }
 }

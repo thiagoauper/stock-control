@@ -1,32 +1,37 @@
-﻿using StockControl.Logging.Interfaces.Loggers;
+﻿using log4net;
+using log4net.Config;
+using StockControl.Logging.Interfaces.Loggers;
 
 namespace StockControl.Logging.log4net.Loggers
 {
     public class StockControlLogger : IStockControlLogger
     {
+        private readonly ILog _log;
+
+        public StockControlLogger()
+        {
+            _log = LogManager.GetLogger(typeof(StockControlLogger));
+            BasicConfigurator.Configure();
+        }
+
         public void LogDebug(string message)
         {
-            throw new NotImplementedException();
+            _log.Debug(message);
         }
 
         public void LogError(string message, Exception exception)
         {
-            throw new NotImplementedException();
+            _log.Error(message, exception);
         }
 
         public void LogInformation(string message)
         {
-            throw new NotImplementedException();
-        }
-
-        public void LogTrace(string message)
-        {
-            throw new NotImplementedException();
+            _log.Info(message);
         }
 
         public void LogWarning(string message)
         {
-            throw new NotImplementedException();
+            _log.Warn(message);
         }
     }
 }
