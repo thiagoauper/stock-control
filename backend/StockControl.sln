@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockControl.Logging.Interf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockControl.Logging.log4net", "StockControl.Logging.log4net\StockControl.Logging.log4net.csproj", "{6B8837B8-DB3D-4E94-A283-5E198AD36051}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockControl.Logging.SCSerilog", "StockControl.Logging.SCSerilog\StockControl.Logging.SCSerilog.csproj", "{26AC2169-239E-4761-910A-7FF9308B21F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{6B8837B8-DB3D-4E94-A283-5E198AD36051}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B8837B8-DB3D-4E94-A283-5E198AD36051}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B8837B8-DB3D-4E94-A283-5E198AD36051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26AC2169-239E-4761-910A-7FF9308B21F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26AC2169-239E-4761-910A-7FF9308B21F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26AC2169-239E-4761-910A-7FF9308B21F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26AC2169-239E-4761-910A-7FF9308B21F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

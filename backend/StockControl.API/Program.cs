@@ -6,8 +6,8 @@ using StockControl.DataAccess.Interfaces.Repositories;
 using StockControl.DataAccess.EntityFramework.Repositories;
 using StockControl.DataAccess.EntityFramework;
 using StockControl.Logging.Interfaces.Loggers;
-using StockControl.Logging.log4net.Loggers;
 using Microsoft.EntityFrameworkCore;
+using StockControl.Logging.SCSerilog.Loggers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,7 +30,7 @@ builder.Services.AddSingleton<IProductRepository, ProductRepository>();
 
 builder.Services.AddSingleton<IStockReportService, StockReportService>();
 
-builder.Services.AddSingleton<IStockControlLogger, StockControlLogger>();
+builder.Services.AddSingleton<IStockControlLogger, SCLogger>();
 
 var allowOrigins = "AllowAll";
 

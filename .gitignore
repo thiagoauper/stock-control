@@ -219,3 +219,5 @@
 /backend/StockControl.Logging.Interfaces/bin/
 /backend/StockControl.Logging.log4net/bin/
 /backend/StockControl.Logging.log4net/obj/
+/backend/StockControl.Logging.SCSerilog/obj/
+/backend/StockControl.Logging.SCSerilog/bin/
