@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StockControl.Application.Interfaces.Services;
 using StockControl.Domain.DTOs;
+using StockControl.Logging.Interfaces.Loggers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,7 +13,7 @@ namespace StockControl.API.Controllers
     {
         private readonly IStockReportService _stockReportService;
 
-        public StockReportController(IStockReportService stockReportService, Logging.Interfaces.Loggers.ILogger logger) : base(logger)
+        public StockReportController(IStockReportService stockReportService, IStockControlLogger logger) : base(logger)
         {
             this._stockReportService = stockReportService;
         }

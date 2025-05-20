@@ -27,7 +27,7 @@ namespace StockControl.API.IntegrationTests
         
         private readonly IStockReportService _stockReportService;
 
-        private readonly ILogger _logger;
+        private readonly IStockControlLogger _logger;
 
         public ProductMovementControllerTests()
         {
@@ -60,7 +60,7 @@ namespace StockControl.API.IntegrationTests
             _stockReportService = new StockReportService(_productMovementManager, _productManager);
             _productMovementService = new ProductMovementService(_productMovementManager, _stockReportService);
             
-            _logger = new Mock<ILogger>().Object;
+            _logger = new Mock<IStockControlLogger>().Object;
         }
 
         /// <summary>

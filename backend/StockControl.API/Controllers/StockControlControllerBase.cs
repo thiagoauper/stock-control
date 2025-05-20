@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StockControl.Logging.Interfaces.Loggers;
 
 namespace StockControl.API.Controllers
 {
     public abstract class StockControlControllerBase : ControllerBase
     {
-        protected readonly Logging.Interfaces.Loggers.ILogger _logger;
+        protected readonly IStockControlLogger _logger;
 
         public delegate T ActionToBeExecuted<T>();
 
-        protected StockControlControllerBase(Logging.Interfaces.Loggers.ILogger logger)
+        protected StockControlControllerBase(IStockControlLogger logger)
         {
             this._logger = logger;
         }

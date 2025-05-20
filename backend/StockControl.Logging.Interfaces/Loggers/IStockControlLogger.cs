@@ -1,6 +1,6 @@
 ﻿namespace StockControl.Logging.Interfaces.Loggers
 {
-    public interface ILogger
+    public interface IStockControlLogger
     {
         void LogError(string message, Exception exception);
         void LogWarning(string message);
