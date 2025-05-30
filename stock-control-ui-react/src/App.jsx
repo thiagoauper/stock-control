@@ -15,11 +15,11 @@ function App() {
     <>
       <h1 id="mainTitle">Welcome to the Stock Control System</h1>
 
-      <div className='flex-container'>
-        <div className={`flex-item ${displayProductMovements ? 'selected' : ''}`} onClick={() => setDisplayProductMovements(true)}>
+      <div className='home-page-buttons-container'>
+        <div className={`home-page-button ${displayProductMovements ? 'selected' : ''}`} onClick={() => setDisplayProductMovements(true)}>
           Product Movements
         </div>
-        <div className={`flex-item ${!displayProductMovements ? 'selected' : ''}`} onClick={() => setDisplayProductMovements(false)}>
+        <div className={`home-page-button ${!displayProductMovements ? 'selected' : ''}`} onClick={() => setDisplayProductMovements(false)}>
           Stock Report
         </div>
       </div>

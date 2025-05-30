@@ -2,19 +2,21 @@
   text-align: center;
 }
 
-.flex-container {
+.home-page-buttons-container {
   display: flex;
   flex-direction: row;
 }
 
-.flex-item {
+.home-page-button {
   flex: 1;
   padding: 10px;
   border: 1px solid #ccc;
   margin: 5px;
+  border-radius: 10px;
+  text-align: center;
 }
 
-.flex-item:hover {
+.home-page-button:hover {
   background-color: #33a9ad;
 }
 
