@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-      <h1>Welcome to the Stock Control System</h1>
+      <h1 id="mainTitle">Welcome to the Stock Control System</h1>
 
       <div className='flex-container'>
         <div className={`flex-item ${displayProductMovements ? 'selected' : ''}`} onClick={() => setDisplayProductMovements(true)}>
