@@ -10,3 +10,11 @@
   border: 1px solid #ccc;
   margin: 5px;
 }
+
+.flex-item:hover {
+  background-color: #33a9ad;
+}
+
+.selected {
+  background-color: #0c21e4;
+}
