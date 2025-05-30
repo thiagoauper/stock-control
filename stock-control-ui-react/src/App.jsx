@@ -6,14 +6,10 @@ import StockReport from './modules/features/reports/components/stock-report/stoc
 function App() {
   const [displayProductMovements, setDisplayProductMovements] = useState(true);
 
-  let content;
-
-  if (displayProductMovements) {
-    content = <AddProductMovement />;
-  }
-  else {
-    content = <StockReport />;
-  }
+  const content = 
+    displayProductMovements
+      ? <AddProductMovement />
+      : <StockReport />;
 
   return (
     <>
