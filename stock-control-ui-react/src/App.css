@@ -23,3 +23,19 @@
 .selected {
   background-color: #0c21e4;
 }
+
+.component-container {
+  padding: 20px;
+}
+
+.fields-container {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.buttons-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}

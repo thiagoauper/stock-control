@@ -1,9 +1,9 @@
 export default function AddProductMovement() {
     return (
-        <div style={{ padding: '20px' }}>
+        <div className="component-container">
             <h2>Add Product Movement</h2>
             
-            <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
+            <div className="fields-container">
                 <div>
                     <input type="text" placeholder="Product Code" />
                 </div>
@@ -18,7 +18,7 @@ export default function AddProductMovement() {
                     <input type="number" placeholder="Quantity" />
                 </div>
             </div>
-            <div style={{ marginTop: '10px' }}>
+            <div className="buttons-container">
                 <button type="button">Add Movement</button>
             </div>
         </div>
