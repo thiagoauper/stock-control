@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <div style={{ display: 'flex', margin: '20px' }}>
-        <div>
+        <div style={{ flex: 1, justifyContent: 'center' }}>
           <h1 id="mainTitle">Welcome to the Stock Control System</h1>
         </div>
         <div style={{ flexAlign: 'right', marginLeft: 'auto', marginRight: '20px' }}>
