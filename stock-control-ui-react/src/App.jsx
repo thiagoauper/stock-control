@@ -11,6 +11,8 @@ function App() {
       ? <AddProductMovement />
       : <StockReport />;
 
+  const selectedTheme = localStorage.getItem('theme') || 'dark';
+
   return (
     <>
       <div style={{ display: 'flex', margin: '20px' }}>
@@ -18,7 +20,7 @@ function App() {
           <h1 id="mainTitle">Welcome to the Stock Control System</h1>
         </div>
         <div style={{ flexAlign: 'right', marginLeft: 'auto', marginRight: '20px' }}>
-          <select style={{ width: '150px' }} id="themeSelector" class="form-control" onClick={() => { setTheme(document.querySelector('#themeSelector').value) }}>
+          <select style={{ width: '150px' }} id="themeSelector" class="form-control" onClick={() => { setTheme(document.querySelector('#themeSelector').value) }} defaultValue={selectedTheme}>
             <option value="dark">Dark mode</option>
             <option value="light">Light mode</option>
           </select>
