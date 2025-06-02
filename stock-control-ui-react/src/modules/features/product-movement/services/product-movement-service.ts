@@ -5,7 +5,7 @@ export async function postProductMovement(productMovement: ProductMovementModel)
     throw new Error('Invalid product movement data');
   }
 
-  const response = await fetch('/api/product-movement', {
+  const response = await fetch('http://localhost:5053/api/ProductMovement', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
