@@ -12,11 +12,12 @@ export default function StockReport() {
             try {
                 setIsLoading(true);
                 const response = await fetch('http://localhost:5053/api/StockReport/2025-06-02');
-                if (!response.ok) {
-                    //TODO: Extract error message from response
-                    throw new Error('Network response was not ok');
-                }
                 const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.detail || 'Network response was not ok');
+                }
+                
                 console.log(data); // Process the stock report data as needed
                 setStockReportData(data);
                 setIsLoading(false);
