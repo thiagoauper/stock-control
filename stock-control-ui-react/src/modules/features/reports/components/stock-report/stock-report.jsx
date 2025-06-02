@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export default function StockReport() {
     const [isLoading, setIsLoading] = useState(false);
     const [stockReportData, setStockReportData] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
 
@@ -12,6 +13,7 @@ export default function StockReport() {
                 setIsLoading(true);
                 const response = await fetch('http://localhost:5053/api/StockReport/2025-06-02');
                 if (!response.ok) {
+                    //TODO: Extract error message from response
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
@@ -20,6 +22,7 @@ export default function StockReport() {
                 setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching stock report:', error);
+                setError(error);
                 setIsLoading(false);
             }
         }
@@ -39,6 +42,7 @@ export default function StockReport() {
                         <p>Balance: {product.balance}</p>
                     </div>
                 ))}
+            {error && <p>Error: {error.message}</p>}
         </div>
     );
 }
