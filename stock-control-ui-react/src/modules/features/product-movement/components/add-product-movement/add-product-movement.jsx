@@ -7,11 +7,23 @@ export default function AddProductMovement() {
     const [productCode, setProductCode] = useState("PROD123");
     const [movementType, setMovementType] = useState("0");
     const [quantity, setQuantity] = useState(25);
+    const [isPosting, setIsPosting] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleAddMovement = async () => {
+        setIsPosting(true);
+        setError(null);
         const productMovement = new ProductMovementModel(productCode, movementType, quantity);
-        const productMovementId = await postProductMovement(productMovement);
-        console.log("Posted product movement with ID:", productMovementId);
+
+        try {
+            const productMovementId = await postProductMovement(productMovement);
+            console.log("Posted product movement with ID:", productMovementId);
+        } catch (error) {
+            console.error("Error posting product movement:", error);
+            setError(error);
+        } finally {
+            setIsPosting(false);
+        }
     };
 
     return (
@@ -35,8 +47,14 @@ export default function AddProductMovement() {
             </div>
             <div className="buttons-container">
                 <button type="button" className="btn btn-primary"
-                    onClick={handleAddMovement}>Add Movement</button>
+                    onClick={handleAddMovement}
+                    disabled={isPosting}>Add Movement</button>
             </div>
+
+            {isPosting && <div>Sending product movement...</div>}
+            {error && <div>Error: {error.message}</div>}
+            {/* TODO: Create a component to display errors! */}
+
         </div>
     );
 }
