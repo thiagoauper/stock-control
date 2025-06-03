@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchStockReport } from "../../services/stock-report-service";
 import LoadingSpinner from "../../../../shared/components/loading-spinner/loading-spinner";
+import ErrorBox from "../../../../shared/components/error-box/error-box";
 
 export default function StockReport() {
     const [isLoading, setIsLoading] = useState(false);
@@ -35,8 +36,7 @@ export default function StockReport() {
                         <p>Balance: {product.balance}</p>
                     </div>
                 ))}
-            {error && <p>Error: {error.message}</p>}
-            {/* TODO: Create a component to display errors! */}
+            {error && <ErrorBox error={error} />}
         </div>
     );
 }

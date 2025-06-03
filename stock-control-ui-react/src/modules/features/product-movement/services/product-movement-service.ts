@@ -13,9 +13,11 @@ export async function postProductMovement(productMovement: ProductMovementModel)
     body: JSON.stringify(productMovement),
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error('Failed to post product movement');
+    throw new Error(data.detail || 'Failed to post product movement.');
   }
 
-  return response.json();
+  return data;
 }

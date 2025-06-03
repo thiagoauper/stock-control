@@ -2,6 +2,7 @@ import { useState } from "react";
 import ProductMovementModel from "../../models/product-movement-model";
 import { postProductMovement } from "../../services/product-movement-service";
 import LoadingSpinner from "../../../../shared/components/loading-spinner/loading-spinner";
+import ErrorBox from "../../../../shared/components/error-box/error-box";
 
 export default function AddProductMovement() {
 
@@ -53,8 +54,7 @@ export default function AddProductMovement() {
             </div>
 
             {isPosting && <LoadingSpinner loadingText="Sending product movement..." />}
-            {error && <div>Error: {error.message}</div>}
-            {/* TODO: Create a component to display errors! */}
+            {error && <ErrorBox error={error} />}
 
         </div>
     );
