@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { fetchStockReport } from "../services/stock-report-service";
+import { fetchStockReport } from "../../services/stock-report-service";
+import LoadingSpinner from "../../../../shared/components/loading-spinner/loading-spinner";
 
 export default function StockReport() {
     const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +27,7 @@ export default function StockReport() {
     return (
         <div>
             <h1>Stock Report</h1>
-            {isLoading && <p>Loading...</p>}
+            {isLoading && <LoadingSpinner loadingText="Loading stock report..." />}
             {!isLoading && stockReportData &&
                 stockReportData.map(product => (
                     <div key={product.productCode}>
