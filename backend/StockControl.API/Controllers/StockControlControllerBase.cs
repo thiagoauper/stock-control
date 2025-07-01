@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StockControl.Logging.Interfaces.Loggers;
+using System.Diagnostics;
 
 namespace StockControl.API.Controllers
 {
@@ -39,7 +40,14 @@ namespace StockControl.API.Controllers
             catch (Exception ex)
             {
                 this._logger.LogError("An error occurred while executing the action.", ex);
-                return Problem("An error occurred while executing call to the API.");
+                string errorMessage = "An error occurred while executing call to the API.";
+
+                if (Debugger.IsAttached)
+                {
+                    errorMessage = ex.Message; //passing actual error message to the client when in Development time
+                }
+
+                return Problem(errorMessage);
             }
         } 
     }
