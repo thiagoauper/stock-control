@@ -11,15 +11,18 @@ export default function AddProductMovement() {
     const [quantity, setQuantity] = useState(0);
     const [isPosting, setIsPosting] = useState(false);
     const [error, setError] = useState(null);
+    const [message, setMessage] = useState(null);
 
     const handleAddMovement = async () => {
         setIsPosting(true);
         setError(null);
+        setMessage(null);
         const productMovement = new ProductMovementModel(productCode, movementType, quantity);
 
         try {
             const productMovementId = await postProductMovement(productMovement);
-            console.log("Posted product movement with ID:", productMovementId);
+            setMessage(`Product movement with ID ${productMovementId} posted successfully.`);
+            console.log(message);
 
             setProductCode("");
             setMovementType("0");
@@ -38,17 +41,17 @@ export default function AddProductMovement() {
 
             <div className="fields-container">
                 <div>
-                    <input type="text" class="form-control" placeholder="Product Code" value={productCode} onChange={(event) => setProductCode(event.target.value)} />
+                    <input type="text" className="form-control" placeholder="Product Code" value={productCode} onChange={(event) => setProductCode(event.target.value)} />
                 </div>
                 <div>
-                    <select class="form-control" id="movementType" value={movementType} onChange={(event) => setMovementType(event.target.value)}>
+                    <select className="form-control" id="movementType" value={movementType} onChange={(event) => setMovementType(event.target.value)}>
                         <option value="">Select Movement Type</option>
                         <option value="0">Inbound</option>
                         <option value="1">Outbound</option>
                     </select>
                 </div>
                 <div>
-                    <input type="number" class="form-control" placeholder="Quantity" value={quantity} onChange={(event) => setQuantity(event.target.value)} />
+                    <input type="number" className="form-control" placeholder="Quantity" value={quantity} onChange={(event) => setQuantity(event.target.value)} />
                 </div>
             </div>
             <div className="buttons-container">
@@ -58,6 +61,7 @@ export default function AddProductMovement() {
             </div>
 
             {isPosting && <LoadingSpinner loadingText="Sending product movement..." />}
+            {message && <div className="alert alert-success">{message}</div>}
             {error && <ErrorBox error={error} />}
 
         </div>
