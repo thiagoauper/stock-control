@@ -29,13 +29,37 @@ export default function StockReport() {
         <div>
             <h1>Stock Report</h1>
             {isLoading && <LoadingSpinner loadingText="Loading stock report..." />}
-            {!isLoading && stockReportData &&
-                stockReportData.map(product => (
-                    <div key={product.productCode}>
-                        <h2>{product.productName}</h2>
-                        <p>Balance: {product.balance}</p>
-                    </div>
-                ))}
+            {!isLoading && stockReportData?.length > 0 &&
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Product Code</th>
+                                <th>Total Inbound</th>
+                                <th>Total Outbound</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {stockReportData.map(product => (
+                                <tr key={product.productCode}>
+                                    <td>{product.productName}</td>
+                                    <td>{product.productCode}</td>
+                                    <td>{product.totalInbound}</td>
+                                    <td>{product.totalOutbound}</td>
+                                    <td>{product.balance}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            }
+            {!isLoading && !stockReportData?.length &&
+                <div>
+                    <p>No data available.</p>
+                </div>
+            }
             {error && <ErrorBox error={error} />}
         </div>
     );
