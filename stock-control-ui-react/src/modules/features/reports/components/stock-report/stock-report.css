@@ -1,0 +1,17 @@
+.stock-report-container {
+    margin: 20px;
+}
+
+table {
+    width: 800px;
+    border-style: dashed;
+    padding: 10px;
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}

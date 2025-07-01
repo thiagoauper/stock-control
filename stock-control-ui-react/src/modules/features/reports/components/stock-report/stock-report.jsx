@@ -1,3 +1,4 @@
+import './stock-report.css'
 import { useEffect, useState } from "react";
 import { fetchStockReport } from "../../services/stock-report-service";
 import LoadingSpinner from "../../../../shared/components/loading-spinner/loading-spinner";
@@ -30,7 +31,7 @@ export default function StockReport() {
             <h1>Stock Report</h1>
             {isLoading && <LoadingSpinner loadingText="Loading stock report..." />}
             {!isLoading && stockReportData?.length > 0 &&
-                <div>
+                <div className="stock-report-container">
                     <table>
                         <thead>
                             <tr>
@@ -56,7 +57,7 @@ export default function StockReport() {
                 </div>
             }
             {!isLoading && !stockReportData?.length &&
-                <div>
+                <div className="stock-report-container">
                     <p>No data available.</p>
                 </div>
             }
